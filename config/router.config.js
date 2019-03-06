@@ -44,6 +44,41 @@ export default [
           },
         ],
       },
+      // 数据节点页
+      {
+        path: '/node',
+        icon: 'form',
+        name: 'node',
+        routes: [
+          {
+            path: '/node/step-form',
+            name: 'nodeStepform',
+            component: './Nodes/StepForm',
+            hideChildrenInMenu: true,
+            routes: [
+              {
+                path: '/node/step-form',
+                redirect: '/node/step-form/info',
+              },
+              {
+                path: '/node/step-form/info',
+                name: 'info',
+                component: './Nodes/StepForm/Step1',
+              },
+              {
+                path: '/node/step-form/confirm',
+                name: 'confirm',
+                component: './Nodes/StepForm/Step2',
+              },
+              {
+                path: '/node/step-form/result',
+                name: 'result',
+                component: './Nodes/StepForm/Step3',
+              },
+            ],
+          },
+        ],
+      },
       // forms
       {
         path: '/form',
