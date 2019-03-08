@@ -71,8 +71,7 @@ class LoginDemo extends React.Component {
         <Submit>Login</Submit>
         <div>
           Other login methods
-          <span className="icon icon-alipay" />
-          <span className="icon icon-taobao" />
+          //TODO 增加微博登录窗口
           <span className="icon icon-weibo" />
           <a style={{ float: 'right' }} href="">Register</a>
         </div>
@@ -89,6 +88,7 @@ ReactDOM.render(<LoginDemo />, mountNode);
   display: inline-block;
   width: 24px;
   height: 24px;
+  /*qiao:  weibo alipay taobao svg */
   background: url('https://gw.alipayobjects.com/zos/rmsportal/itDzjUnkelhQNsycranf.svg');
   margin-left: 16px;
   vertical-align: middle;

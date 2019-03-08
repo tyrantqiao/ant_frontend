@@ -42,21 +42,15 @@ class Step1 extends React.PureComponent {
       <Fragment>
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
           <Form.Item {...formItemLayout} label="数据节点名字">
-            {getFieldDecorator('nodeName', {
-              initialValue: data.nodeName,
-              rules: [{ required: true, message: '请填写数据节点的名字' }],
-            })(
-              <Select placeholder="node_demo_1">
-                <Option value="node_demo_1">node_demo_1</Option>
-              </Select>
-            )}
+            <Input.Group compact>
+              {getFieldDecorator('nodeName', {
+                initialValue: data.nodeName,
+                rules: [{ required: true, message: '请填写数据节点的名字' }],
+              })(<Input style={{ width: 'calc(100% - 100px)' }} placeholder="demo_name_1" />)}
+            </Input.Group>
           </Form.Item>
           <Form.Item {...formItemLayout} label="数据节点类型">
             <Input.Group compact>
-              {/* <Select defaultValue="alipay" style={{ width: 100 }}>
-                <Option value="alipay">支付宝</Option>
-                <Option value="bank">银行账户</Option>
-              </Select> */}
               {getFieldDecorator('nodeType', {
                 initialValue: data.nodeType,
                 rules: [
@@ -76,7 +70,7 @@ class Step1 extends React.PureComponent {
                   message: '请输入合法数字',
                 }
               ],
-            })(<Input placeholder="请输入最小工作值" />)}
+            })(<Input prefix="$" placeholder="请输入最小工作值" />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="最大工作值">
             {getFieldDecorator('maxVal', {
@@ -88,7 +82,7 @@ class Step1 extends React.PureComponent {
                   message: '请输入合法数字',
                 },
               ],
-            })(<Input prefix="￥" placeholder="请输入最大工作值" />)}
+            })(<Input prefix="$" placeholder="请输入最大工作值" />)}
           </Form.Item>
           <Form.Item
             wrapperCol={{
@@ -117,6 +111,11 @@ class Step1 extends React.PureComponent {
             手动导入时应注意选择对应的传感器id，然后导入数据需要选择好时间单位等等。
           </p>
         </div>
+        
+        {/* <Select defaultValue="alipay" style={{ width: 100 }}>
+          <Option value="alipay">支付宝</Option>
+          <Option value="bank">银行账户</Option>
+        </Select> */}
       </Fragment>
     );
   }

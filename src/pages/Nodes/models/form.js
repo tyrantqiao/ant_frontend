@@ -3,15 +3,18 @@ import { message } from 'antd';
 import { fakeSubmitForm } from '@/services/api';
 
 export default {
+  // model的定义名字
   namespace: 'form',
 
+  // 状态机可能被组件的事件处理器改变并触发用户界面更新的数据，譬如需要对用户输入,服务器请求或者时间变化等作出响应。
+  // 而props是父级向子级传播数据的方式
   state: {
     // 分步表单的数据节点配置
     step: {
-      node_name: 'temperature_node_1',
-      node_type: 'temperature',
-      max_val: '10',
-      min_val: '1',
+      nodeName: 'temperature_node_1',
+      nodeType: 'temperature',
+      maxVal: '10',
+      minVal: '1',
     },
   },
 
@@ -28,13 +31,7 @@ export default {
         type: 'saveStepFormData',
         payload,
       });
-      //TODO 这里就要修改为node的表单提交 
       yield put(routerRedux.push('/node/step-form/result'));
-    },
-    // 高级表单，其中需要日期的那份
-    *submitAdvancedForm({ payload }, { call }) {
-      yield call(fakeSubmitForm, payload);
-      message.success('提交成功');
     },
   },
 

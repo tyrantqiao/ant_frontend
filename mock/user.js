@@ -2,74 +2,60 @@
 export default {
   // 支持值为 Object 和 Array
   'GET /api/currentUser': {
-    name: 'Serati Ma',
+    name: 'tyrantqiao',
     avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
     userid: '00000001',
-    email: 'antdesign@alipay.com',
-    signature: '海纳百川，有容乃大',
-    title: '交互专家',
-    group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+    email: 'tyrantqiao@icloud.com',
+    signature: '欢迎大家一起交流',
+    title: '用户界面',
+    group: 'Java-tyrant',
+    // 用户界面的标签页
     tags: [
       {
         key: '0',
-        label: '很有想法的',
+        label: 'java后端',
       },
       {
         key: '1',
-        label: '专注设计',
-      },
-      {
-        key: '2',
-        label: '辣~',
-      },
-      {
-        key: '3',
-        label: '大长腿',
-      },
-      {
-        key: '4',
-        label: '川妹子',
-      },
-      {
-        key: '5',
-        label: '海纳百川',
+        label: '文章撰写',
       },
     ],
     notifyCount: 12,
     unreadCount: 11,
     country: 'China',
+    // mock/geographic/city.json
     geographic: {
       province: {
-        label: '浙江省',
-        key: '330000',
+        label: '广东省',
+        key: '440000',
       },
       city: {
-        label: '杭州市',
-        key: '330100',
+        label: '广州市',
+        key: '440100',
       },
     },
-    address: '西湖区工专路 77 号',
-    phone: '0752-268888888',
+    address: '广州华农',
+    phone: '0000-00000000',
   },
   // GET POST 可省略
   'GET /api/users': [
     {
       key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
+      name: 'Tyrant Qiao',
+      age: 21,
+      address: 'Guangzhou SCAU',
     },
     {
       key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
+      name: 'Tyrant Xin',
+      age: 99,
+      address: 'Japan Tokyo',
     },
     {
       key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
+      name: 'Tyrant joe',
+      age: 5,
+      address: 'Thailand',
     },
   ],
   'POST /api/login/account': (req, res) => {
