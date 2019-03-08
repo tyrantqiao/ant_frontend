@@ -65,6 +65,7 @@ class Step2 extends React.PureComponent {
           {/* <span className={styles.uppercase}>（{digitUppercase(data.amount)}）</span> */}
         </Form.Item>
         <Divider style={{ margin: '24px 0' }} />
+        {/* 无法提交密码进入完成界面 */}
         <Form.Item {...formItemLayout} label="管理员密码" required={false}>
           {getFieldDecorator('password', {
             initialValue: '123456',

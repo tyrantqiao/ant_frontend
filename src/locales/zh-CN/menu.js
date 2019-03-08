@@ -7,6 +7,13 @@ export default {
   'menu.dashboard.analysis': '分析页',
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
+  // 设置页面导航栏的中文内容
+  'menu.node': '表单页',
+  'menu.node.basicform': '基础表单',
+  'menu.node.stepform': '管理数据节点',
+  'menu.node.stepform.info': '管理数据节点（填写数据节点信息）',
+  'menu.node.stepform.confirm': '管理数据节点（确认表单信息）',
+  'menu.node.stepform.result': '管理数据节点（完成）',
   'menu.form': '表单页',
   'menu.form.basicform': '基础表单',
   'menu.form.stepform': '分步表单',
