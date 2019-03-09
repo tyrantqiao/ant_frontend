@@ -1,6 +1,7 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-import { fakeSubmitForm } from '@/services/api';
+// 需要引入api的函数
+import { fakeSubmitForm, submitNodeForm } from '@/services/api';
 
 export default {
   // model的定义名字
@@ -28,7 +29,6 @@ export default {
     // payload即action的数据载体，在这里也就为data，data则装了我们的表单数据
     *submitStepForm({ payload }, { call, put }) {
       // yield call(fakeSubmitForm, payload);
-
       // 开始改切后端接口
       // submitNodeForm的request方法写在src/services/api.js中
       yield call(submitNodeForm, payload);
