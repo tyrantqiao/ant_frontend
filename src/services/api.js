@@ -48,7 +48,7 @@ export async function updateRule(params = {}) {
 
 // 用来给node/stepForm提交数据节点管理的请求表单，将会向后端8001/docs发出请求
 export async function submitNodeForm(params) {
-  return request('${backend}/api/nodes/', {
+  return request(`${backend}/api/nodes/`, {
     method: 'POST',
     body: params,
   });
