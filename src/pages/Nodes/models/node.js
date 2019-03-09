@@ -25,8 +25,13 @@ export default {
       message.success('提交成功');
     },
     // 分步表单
+    // payload即action的数据载体，在这里也就为data，data则装了我们的表单数据
     *submitStepForm({ payload }, { call, put }) {
-      yield call(fakeSubmitForm, payload);
+      // yield call(fakeSubmitForm, payload);
+
+      // 开始改切后端接口
+      // submitNodeForm的request方法写在src/services/api.js中
+      yield call(submitNodeForm, payload);
       yield put({
         type: 'saveStepFormData',
         payload,

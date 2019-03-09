@@ -1,6 +1,9 @@
 import { stringify } from 'qs';
 import request from '@/utils/request';
 
+// django启动的平台连接
+let backend="http://127.0.0.1:8001"
+
 export async function queryProjectNotice() {
   return request('/api/project/notice');
 }
@@ -40,6 +43,14 @@ export async function updateRule(params = {}) {
       ...params.body,
       method: 'update',
     },
+  });
+}
+
+// 用来给node/stepForm提交数据节点管理的请求表单，将会向后端8001/docs发出请求
+export async function submitNodeForm(params) {
+  return request('${backend}/api/nodes/', {
+    method: 'POST',
+    body: params,
   });
 }
 

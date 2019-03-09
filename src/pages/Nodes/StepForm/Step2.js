@@ -39,7 +39,9 @@ class Step2 extends React.PureComponent {
           // dispatch应在组件connect Models后，通过props传入的
           // 所以这里node/submitStepForm就是Models/node.js中定义的，node是namespace名字
           dispatch({
+            // type不可缺省，其他payload、error、meta等可缺省
             type: 'node/submitStepForm',
+            // payload是dispatch的一个对象，是action携带数据的载体
             payload: {
               ...data,
               ...values,
