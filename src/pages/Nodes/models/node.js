@@ -4,7 +4,7 @@ import { fakeSubmitForm } from '@/services/api';
 
 export default {
   // model的定义名字
-  namespace: 'form',
+  namespace: 'node',
 
   // 状态机可能被组件的事件处理器改变并触发用户界面更新的数据，譬如需要对用户输入,服务器请求或者时间变化等作出响应。
   // 而props是父级向子级传播数据的方式

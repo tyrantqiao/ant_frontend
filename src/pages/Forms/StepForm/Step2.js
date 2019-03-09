@@ -14,7 +14,9 @@ const formItemLayout = {
   },
 };
 
+// 每个dva对象都会有loading属性
 @connect(({ form, loading }) => ({
+  // 提交中，根据loading.effects对象判断异步请求是否完成
   submitting: loading.effects['form/submitStepForm'],
   data: form.step,
 }))

@@ -16,16 +16,17 @@ const formItemLayout = {
 };
 
 // connect属于dva的语法糖，用于将数据绑定起来
-@connect(({ form }) => ({
-  data: form.step,
+// 这里就应该是负责连接models文件，以文件名形式绑定
+@connect(({ node }) => ({
+  data: node.step,
 }))
 // 这样包装后的组件会自带 this.props.form 属性
 @Form.create()
 class Step1 extends React.PureComponent {
   render() {
     // 数据内容要切为node
-    const { form, dispatch, data } = this.props;
-    const { getFieldDecorator, validateFields } = form;
+    const { node, dispatch, data } = this.props;
+    const { getFieldDecorator, validateFields } = node;
     const onValidateForm = () => {
       validateFields((err, values) => {
         if (!err) {

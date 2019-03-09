@@ -15,16 +15,18 @@ const formItemLayout = {
 };
 
 // 连接数据，并加载效果
-@connect(({ form, loading }) => ({
+// 每个dva对象都会有loading属性
+@connect(({ node, loading }) => ({
+  // 提交中，根据loading.effects对象判断异步请求是否完成
   submitting: loading.effects['node/submitStepForm'],
-  data: form.step,
+  data: node.step,
 }))
 @Form.create()
 class Step2 extends React.PureComponent {
   render() {
     // form的修改
-    const { form, data, dispatch, submitting } = this.props;
-    const { getFieldDecorator, validateFields } = form;
+    const { node, data, dispatch, submitting } = this.props;
+    const { getFieldDecorator, validateFields } = node;
     const onPrev = () => {
       // 链接的更改
       router.push('/node/step-form/info');
@@ -33,6 +35,9 @@ class Step2 extends React.PureComponent {
       e.preventDefault();
       validateFields((err, values) => {
         if (!err) {
+          // 改变state的唯一途径通过dispatch函数调用action
+          // dispatch应在组件connect Models后，通过props传入的
+          // 所以这里node/submitStepForm就是Models/node.js中定义的，node是namespace名字
           dispatch({
             type: 'node/submitStepForm',
             payload: {

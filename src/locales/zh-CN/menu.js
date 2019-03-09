@@ -8,7 +8,7 @@ export default {
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
   // 设置页面导航栏的中文内容
-  'menu.node': '表单页',
+  'menu.node': '数据节点页',
   'menu.node.basicform': '基础表单',
   'menu.node.nodeStepform': '管理数据节点',
   'menu.node.nodeStepform.info': '管理数据节点（填写数据节点信息）',

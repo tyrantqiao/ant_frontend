@@ -7,6 +7,13 @@ export default {
   'menu.dashboard.analysis': 'Analysis',
   'menu.dashboard.monitor': 'Monitor',
   'menu.dashboard.workplace': 'Workplace',
+  // node description
+  'menu.node': 'Data Nodes Page',
+  'menu.node.basicform': 'Basic Form',
+  'menu.node.nodeStepform': 'Manage Data node',
+  'menu.node.nodeStepform.info': 'Request Form（Fill in node information）',
+  'menu.node.nodeStepform.confirm': 'Request Form（Confirm node information）',
+  'menu.node.nodeStepform.result': 'Request Form（Completed）',
   'menu.form': 'Form',
   'menu.form.basicform': 'Basic Form',
   'menu.form.stepform': 'Step Form',
