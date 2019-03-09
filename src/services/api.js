@@ -2,7 +2,7 @@ import { stringify } from 'qs';
 import request from '@/utils/request';
 
 // django启动的平台连接
-let backend="http://127.0.0.1:8001"
+let backend="http://127.0.0.1:8001";
 
 export async function queryProjectNotice() {
   return request('/api/project/notice');
