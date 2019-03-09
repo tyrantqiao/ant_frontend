@@ -24,9 +24,9 @@ const formItemLayout = {
 @Form.create()
 class Step2 extends React.PureComponent {
   render() {
-    // form的修改
-    const { node, data, dispatch, submitting } = this.props;
-    const { getFieldDecorator, validateFields } = node;
+    // form即表格的对象，getFieldDecorator和validateFields也就为form的属性
+    const { form, data, dispatch, submitting } = this.props;
+    const { getFieldDecorator, validateFields } = form;
     const onPrev = () => {
       // 链接的更改
       router.push('/node/step-form/info');
@@ -70,8 +70,9 @@ class Step2 extends React.PureComponent {
           {/* <span className={styles.uppercase}>（{digitUppercase(data.amount)}）</span> */}
         </Form.Item>
         <Divider style={{ margin: '24px 0' }} />
-        {/* 无法提交密码进入完成界面 */}
+        {/* {...props}  */}
         <Form.Item {...formItemLayout} label="管理员密码" required={false}>
+          {/* getFieldDecorator 和表单进行双向绑定 */}
           {getFieldDecorator('password', {
             initialValue: '123456',
             rules: [
