@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
-// 需要引入api的函数
+// 需要引入api的函数 error
 import { fakeSubmitForm, submitNodeForm } from '@/services/api';
 
 export default {
@@ -12,8 +12,8 @@ export default {
   state: {
     // 分步表单的数据节点配置
     step: {
-      nodeName: 'temperature_node_1',
-      nodeType: 'temperature',
+      node_name: 'temperature_node_1',
+      node_type: 'temperature',
       maxVal: '10',
       minVal: '1',
     },

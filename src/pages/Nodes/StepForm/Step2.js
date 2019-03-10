@@ -59,10 +59,10 @@ class Step2 extends React.PureComponent {
           style={{ marginBottom: 24 }}
         />
         <Form.Item {...formItemLayout} className={styles.stepFormText} label="数据节点名称">
-          {data.nodeName}
+          {data.node_name}
         </Form.Item>
         <Form.Item {...formItemLayout} className={styles.stepFormText} label="数据节点类型">
-          {data.nodeType}
+          {data.node_type}
         </Form.Item>
         <Form.Item {...formItemLayout} className={styles.stepFormText} label="最小安全值">
         <span className={styles.number}>{data.minVal}</span>

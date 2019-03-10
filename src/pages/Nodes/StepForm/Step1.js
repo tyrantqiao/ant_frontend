@@ -44,16 +44,16 @@ class Step1 extends React.PureComponent {
         <Form layout="horizontal" className={styles.stepForm} hideRequiredMark>
           <Form.Item {...formItemLayout} label="数据节点名字">
             <Input.Group compact>
-              {getFieldDecorator('nodeName', {
-                initialValue: data.nodeName,
+              {getFieldDecorator('node_name', {
+                initialValue: data.node_name,
                 rules: [{ required: true, message: '请填写数据节点的名字' }],
               })(<Input style={{ width: 'calc(100% - 100px)' }} placeholder="demo_name_1" />)}
             </Input.Group>
           </Form.Item>
           <Form.Item {...formItemLayout} label="数据节点类型">
             <Input.Group compact>
-              {getFieldDecorator('nodeType', {
-                initialValue: data.nodeType,
+              {getFieldDecorator('node_type', {
+                initialValue: data.node_type,
                 rules: [
                   { required: true, message: '请输入数据节点的类型' }
                   // { type: 'email', message: '限制类型' },

@@ -21,7 +21,7 @@ class Step3 extends React.PureComponent {
             数据节点名称：
           </Col>
           <Col xs={24} sm={16}>
-            {data.nodeName}
+            {data.node_name}
           </Col>
         </Row>
         <Row>
@@ -29,7 +29,7 @@ class Step3 extends React.PureComponent {
             数据节点属性：
           </Col>
           <Col xs={24} sm={16}>
-            {data.nodeType}
+            {data.node_type}
           </Col>
         </Row>
         <Row>
