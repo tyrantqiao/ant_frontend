@@ -29,19 +29,6 @@ const formItemLayout = {
 // 这样包装后的组件会自带 this.props.form 属性
 @Form.create()
 class Step1 extends React.PureComponent {
-    checkSafe = () => {
-        this
-            .props
-            .form
-            .validateFields((err, data) => {
-                if (!err) {
-                    this.setState({
-                      data.safe: err.target.checked,
-                    })
-                    console.info('success');
-                }
-            },);
-    }
     render() {
         // form是表单的对象，下面两个属性为form的属性，与表单绑定以及字段校验
         const {form, dispatch, data} = this.props;
