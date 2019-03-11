@@ -29,8 +29,18 @@ const formItemLayout = {
 // 这样包装后的组件会自带 this.props.form 属性
 @Form.create()
 class Step1 extends React.PureComponent {
-    changeSafe = (e) => {
-        this.setState({safe: e.target.checked});
+    checkSafe = () => {
+        this
+            .props
+            .form
+            .validateFields((err, data) => {
+                if (!err) {
+                    this.setState({
+                      data.safe: err.target.checked,
+                    })
+                    console.info('success');
+                }
+            },);
     }
     render() {
         // form是表单的对象，下面两个属性为form的属性，与表单绑定以及字段校验
@@ -86,9 +96,15 @@ class Step1 extends React.PureComponent {
 
                     {/* 数据安全的bool位 */}
                     <Form.Item {...formItemLayout} label="数据是否安全">
-                        <Checkbox checked={this.data.safe} onChange={this.changeSafe}>
-                            数据是否安全
-                        </Checkbox>
+                          {getFieldDecorator('safe',{
+                            initialValue: data.safe,
+                            rules: [
+                              {
+                                required: true,
+                                message: '数据是否安全',
+                              }
+                            ]
+                          })(<Checkbox></Checkbox>)}
                     </Form.Item>
 
                     {/* 数据提交时间 */}
