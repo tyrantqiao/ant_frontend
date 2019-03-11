@@ -36,12 +36,16 @@ class Step1 extends React.PureComponent {
         const {form, dispatch, data} = this.props;
         const {getFieldDecorator, validateFields} = form;
         const values = {
-            ...fieldsValue,
-            'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss')
+            // ...fieldsValue,
+            'date-time-picker': 'date-time-picker'.format('YYYY-MM-DD HH:mm:ss')
         };
         const onValidateForm = () => {
             validateFields((err, values) => {
                 if (!err) {
+                    const time = {
+                        ...data,
+                        'date-time-picker': data['date-time-picker'].format('YYYY-MM-DD HH:mm:ss')
+                    }
                     dispatch({
                         // 看表单形式为添加还是删除，加入一个选择框
                         type: 'val/saveStepFormData',

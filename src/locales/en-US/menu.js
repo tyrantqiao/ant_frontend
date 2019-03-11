@@ -14,6 +14,13 @@ export default {
   'menu.node.nodeStepform.info': 'Request Form（Fill in node information）',
   'menu.node.nodeStepform.confirm': 'Request Form（Confirm node information）',
   'menu.node.nodeStepform.result': 'Request Form（Completed）',
+  // data description
+  'menu.val': 'Data vals Page',
+  'menu.val.basicform': 'Basic Form',
+  'menu.val.valStepform': 'Manage Data val',
+  'menu.val.valStepform.info': 'Request Form（Fill in val information）',
+  'menu.val.valStepform.confirm': 'Request Form（Confirm val information）',
+  'menu.val.valStepform.result': 'Request Form（Completed）',
   'menu.form': 'Form',
   'menu.form.basicform': 'Basic Form',
   'menu.form.stepform': 'Step Form',
