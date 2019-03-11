@@ -92,6 +92,7 @@ class Step1 extends React.PureComponent {
                     </Form.Item>
 
                     {/* 数据提交时间 */}
+                    {/* 时间picker这里需要做format化，而format函数需要标志出id类型 */}
                     <Form.Item {...formItemLayout} label="数据记录时间">
                         {getFieldDecorator('recordTime', {
                             rules: [

@@ -3,6 +3,7 @@ import {connect} from 'dva';
 import {Form, Input, Button, Alert, Divider} from 'antd';
 import router from 'umi/router';
 import {digitUppercase} from '@/utils/utils';
+import {formatMessage, FormattedMessage} from 'umi/locale';
 import styles from './style.less';
 
 const formItemLayout = {
@@ -57,6 +58,7 @@ class Step2 extends React.PureComponent {
                     style={{
                     marginBottom: 24
                 }}/>
+
                 <Form.Item {...formItemLayout} className={styles.stepFormText} label="数据单位">
                     {data.unit}
                 </Form.Item>
@@ -67,7 +69,7 @@ class Step2 extends React.PureComponent {
                     {data.safe}
                 </Form.Item>
                 <Form.Item {...formItemLayout} className={styles.stepFormText} label="数据记录时间">
-                    {data.recordTime}
+                    {data.recordTime}.format('YYYY-MM-DD  HH:mm:ss')
                 </Form.Item>
                 <Form.Item {...formItemLayout} className={styles.stepFormText} label="数据节点id">
                     <span className={styles.number}>{data.nodeId}</span>
