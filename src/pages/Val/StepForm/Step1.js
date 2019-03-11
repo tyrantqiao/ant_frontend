@@ -100,7 +100,7 @@ class Step1 extends React.PureComponent {
                                     message: '请输入数据记录时间'
                                 }
                             ]
-                        })(<DatePicker showTime placeholder="Select time" format="YYYY-MM-DD HH:mm:ss"/>)}
+                        })(<DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>)}
                     </Form.Item>
 
                     {/* 数据节点的数值 */}
