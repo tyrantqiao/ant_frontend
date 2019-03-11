@@ -41,9 +41,11 @@ export default {
             const response = yield call(getNodes);
             yield put({
                 type: 'save',
-                payload: Array.isArray(response)
-                    ? response
-                    : []
+                payload: {
+                    nodes: Array.isArray(response)
+                        ? response
+                        : []
+                }
             });
             message.success('获取数据成功');
         }
