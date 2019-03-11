@@ -53,9 +53,7 @@ class Step1 extends React.PureComponent {
         const onNodesFocus = () => {
             const {dispatch} = this.props;
             dispatch({type: 'val/getNodes'});
-            this.setState({
-              nodes: data.nodes,
-            })
+            this.setState({nodes: data.nodes})
         };
         return (
             <Fragment>
@@ -134,7 +132,7 @@ class Step1 extends React.PureComponent {
                                 }
                             ]
                         })(
-                            <Select value={this.nodes} placeholder="请选择数据节点node" onFocus={onNodesFocus}>
+                            <Select value={this.state.nodes} onFocus={onNodesFocus}>
                                 {data
                                     .nodes
                                     .map(node => (
