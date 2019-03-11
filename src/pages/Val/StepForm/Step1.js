@@ -35,10 +35,6 @@ class Step1 extends React.PureComponent {
         // form是表单的对象，下面两个属性为form的属性，与表单绑定以及字段校验
         const {form, dispatch, data} = this.props;
         const {getFieldDecorator, validateFields} = form;
-        const values = {
-            // ...fieldsValue,
-            'date-time-picker': 'date-time-picker'.format('YYYY-MM-DD HH:mm:ss')
-        };
         const onValidateForm = () => {
             validateFields((err, values) => {
                 if (!err) {
