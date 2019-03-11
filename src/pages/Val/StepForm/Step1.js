@@ -37,10 +37,10 @@ class Step1 extends React.PureComponent {
         const onValidateForm = () => {
             validateFields((err, values) => {
                 if (!err) {
-                    const time = {
-                        ...data,
-                        'date-time-picker': data['date-time-picker'].format('YYYY-MM-DD HH:mm:ss')
-                    }
+                    // const time = {
+                    //     ...data,
+                    //     'date-time-picker': data['date-time-picker'].format('YYYY-MM-DD HH:mm:ss')
+                    // }
                     dispatch({
                         // 看表单形式为添加还是删除，加入一个选择框
                         type: 'val/saveStepFormData',
@@ -103,7 +103,7 @@ class Step1 extends React.PureComponent {
                                     message: '请输入数据记录时间'
                                 }
                             ]
-                        })(<DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>)}
+                        })(<DatePicker showTime placeholder="Select time" format="YYYY-MM-DD HH:mm:ss"/>)}
                     </Form.Item>
 
                     {/* 数据节点的数值 */}
