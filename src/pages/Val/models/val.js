@@ -16,7 +16,21 @@ export default {
             unit: 'm',
             safe: true,
             recordTime: '2019-03-14T11:45:00',
-            nodes: []
+            nodes: [
+                {
+                    "id": 1,
+                    "node_name": "temperature_1",
+                    "node_type": "temperature",
+                    "maxVal": 2,
+                    "minVal": 22
+                }, {
+                    "id": 2,
+                    "node_name": "temperature_node_1",
+                    "node_type": "temperature",
+                    "maxVal": 10,
+                    "minVal": 1
+                }
+            ]
         }
     },
 
