@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import {connect} from 'dva';
+import {formatMessage, FormattedMessage} from 'umi/locale';
 import {
     Form,
     DatePicker,
