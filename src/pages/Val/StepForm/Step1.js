@@ -132,7 +132,7 @@ class Step1 extends React.PureComponent {
                                 }
                             ]
                         })(
-                            <Select value={this.state.step.nodes} onFocus={onNodesFocus}>
+                            <Select value={data.nodes} onFocus={onNodesFocus}>
                                 {data
                                     .nodes
                                     .map(node => (
