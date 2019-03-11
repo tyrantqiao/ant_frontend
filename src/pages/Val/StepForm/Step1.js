@@ -52,7 +52,7 @@ class Step1 extends React.PureComponent {
             });
         };
         // 当选择框获取焦点时，则调用列表获取
-        handleFocus = () => {
+        const handleFocus = () => {
             const {dispatch} = this.props;
             dispatch({
                 type: 'val/getNodes',
