@@ -97,7 +97,6 @@ class Step1 extends React.PureComponent {
                             rules: [
                                 {
                                     required: true,
-                                    type: 'object',
                                     message: '请输入数据记录时间'
                                 }
                             ]
