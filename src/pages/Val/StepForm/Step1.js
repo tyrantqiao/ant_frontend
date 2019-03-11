@@ -24,8 +24,8 @@ const formItemLayout = {
     }
 };
 
-// connect属于dva的语法糖，用于将数据绑定起来 这里就应该是负责连接models文件，以文件名形式绑定
-// data: val.step把val.setp赋值给data
+// connect属于dva的语法糖，用于将数据绑定起来 这里就应该是负责连接models文件，以文件名形式绑定 data:
+// val.step把val.setp赋值给data
 @connect(({val}) => ({data: val.step}))
 // 这样包装后的组件会自带 this.props.form 属性
 @Form.create()
@@ -37,10 +37,8 @@ class Step1 extends React.PureComponent {
         const onValidateForm = () => {
             validateFields((err, values) => {
                 if (!err) {
-                    // const time = {
-                    //     ...data,
-                    //     'date-time-picker': data['date-time-picker'].format('YYYY-MM-DD HH:mm:ss')
-                    // }
+                    // const time = {     ...data,     'date-time-picker':
+                    // data['date-time-picker'].format('YYYY-MM-DD HH:mm:ss') }
                     dispatch({
                         // 看表单形式为添加还是删除，加入一个选择框
                         type: 'val/saveStepFormData',
@@ -53,9 +51,7 @@ class Step1 extends React.PureComponent {
         // 当选择框获取焦点时，则调用列表获取
         const handleFocus = () => {
             const {dispatch} = this.props;
-            dispatch({
-                type: 'val/getNodes',
-            });
+            dispatch({type: 'val/getNodes'});
         };
         return (
             <Fragment>
@@ -81,20 +77,22 @@ class Step1 extends React.PureComponent {
 
                     {/* 数据安全的bool位 */}
                     <Form.Item {...formItemLayout} label="数据是否安全">
-                          {getFieldDecorator('safe',{
+                        {getFieldDecorator('safe', {
                             initialValue: data.safe,
                             rules: [
-                              {
-                                required: true,
-                                message: '数据是否安全',
-                              }
+                                {
+                                    required: true,
+                                    message: '数据是否安全'
+                                }
                             ]
-                          })(<Checkbox></Checkbox>)}
+                        })(
+                            <Checkbox></Checkbox>
+                        )}
                     </Form.Item>
 
                     {/* 数据提交时间 */}
                     <Form.Item {...formItemLayout} label="数据记录时间">
-                        {getFieldDecorator('date-time-picker', {
+                        {getFieldDecorator('recordTime', {
                             initialValue: data.recordTime,
                             rules: [
                                 {
@@ -134,11 +132,13 @@ class Step1 extends React.PureComponent {
                             ]
                         })(
                             <Select placeholder="请选择数据节点node" onFocus={handleFocus}>
-                                {data.nodes.map(node => (
-                                    <Option key={node.id} value={node.id}>
-                                        {node.node_name}
-                                    </Option>
-                                ))}
+                                {data
+                                    .nodes
+                                    .map(node => (
+                                        <Option key={node.id} value={node.id}>
+                                            {node.node_name}
+                                        </Option>
+                                    ))}
                             </Select>
                         )}
                     </Form.Item>
