@@ -7,7 +7,8 @@ import {
     Input,
     Button,
     Select,
-    Divider
+    Divider,
+    Checkbox
 } from 'antd';
 import router from 'umi/router';
 import styles from './style.less';
