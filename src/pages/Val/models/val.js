@@ -15,7 +15,8 @@ export default {
             val: '10',
             unit: 'm',
             safe: true,
-            recordTime: '2019-03-14T11:45:00'
+            recordTime: '2019-03-14T11:45:00',
+            nodes: []
         }
     },
 

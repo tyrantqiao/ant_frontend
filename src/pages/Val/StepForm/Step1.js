@@ -25,6 +25,7 @@ const formItemLayout = {
 };
 
 // connect属于dva的语法糖，用于将数据绑定起来 这里就应该是负责连接models文件，以文件名形式绑定
+// data: val.step把val.setp赋值给data
 @connect(({val}) => ({data: val.step}))
 // 这样包装后的组件会自带 this.props.form 属性
 @Form.create()
