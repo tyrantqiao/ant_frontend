@@ -54,6 +54,7 @@ class Step1 extends React.PureComponent {
             const {dispatch} = this.props;
             dispatch({
                 type: 'val/getNodes',
+                payload: nodes
             });
         };
         return (
