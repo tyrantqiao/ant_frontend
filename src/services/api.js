@@ -46,12 +46,27 @@ export async function updateRule(params = {}) {
   });
 }
 
+
+// 用来给val/stepForm提交数据管理的请求表单，将会向后端8001/docs发出请求
+export async function submitValForm(params) {
+  return request(`${backend}/api/data/`, {
+    method: 'POST',
+    body: params,
+  });
+}
+
+
 // 用来给node/stepForm提交数据节点管理的请求表单，将会向后端8001/docs发出请求
 export async function submitNodeForm(params) {
   return request(`${backend}/api/nodes/`, {
     method: 'POST',
     body: params,
   });
+}
+
+// 给val页获取nodes 返回list的形式
+export async function getNodes() {
+  return request(`${backend}/api/nodes`);
 }
 
 export async function fakeSubmitForm(params) {

@@ -44,6 +44,41 @@ export default [
           },
         ],
       },
+      // 数据页
+      {
+        path: '/val',
+        icon: 'form',
+        name: 'val',
+        routes: [
+          {
+            path: '/val/step-form',
+            name: 'valStepform',
+            component: './Val/StepForm',
+            hideChildrenInMenu: true,
+            routes: [
+              {
+                path: '/val/step-form',
+                redirect: '/val/step-form/info',
+              },
+              {
+                path: '/val/step-form/info',
+                name: 'info',
+                component: './Val/StepForm/Step1',
+              },
+              {
+                path: '/val/step-form/confirm',
+                name: 'confirm',
+                component: './Val/StepForm/Step2',
+              },
+              {
+                path: '/val/step-form/result',
+                name: 'result',
+                component: './Val/StepForm/Step3',
+              },
+            ],
+          },
+        ],
+      },
       // 数据节点页
       {
         path: '/node',
