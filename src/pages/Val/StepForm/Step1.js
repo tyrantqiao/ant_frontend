@@ -134,7 +134,7 @@ class Step1 extends React.PureComponent {
                             ]
                         })(
                             <Select placeholder="请选择数据节点node" onFocus={handleFocus}>
-                                {nodes.map(node => (
+                                {data.nodes.map(node => (
                                     <Option key={node.id} value={node.id}>
                                         {node.node_name}
                                     </Option>
