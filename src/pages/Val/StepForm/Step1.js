@@ -97,7 +97,7 @@ class Step1 extends React.PureComponent {
                             rules: [
                                 {
                                     required: true,
-                                    message: formatMessage('请输入记录时间')
+                                    message: formatMessage({id: 'validation.date.required'})
                                 }
                             ]
                         })(<DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>)}
