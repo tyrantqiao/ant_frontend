@@ -35,6 +35,7 @@ class Step1 extends React.PureComponent {
         // form是表单的对象，下面两个属性为form的属性，与表单绑定以及字段校验
         const {form, dispatch, data} = this.props;
         const {getFieldDecorator, validateFields} = form;
+        const nodeOptions= this.state.step.nodes.map(node => <Option key={node}>{node}</Option>);
         const onValidateForm = () => {
             validateFields((err, values) => {
                 if (!err) {
@@ -133,13 +134,7 @@ class Step1 extends React.PureComponent {
                             ]
                         })(
                             <Select value={data.nodes} onFocus={onNodesFocus}>
-                                {data
-                                    .nodes
-                                    .map(node => (
-                                        <Option key={node.id}>
-                                            {node.node_name}
-                                        </Option>
-                                    ))}
+                                {nodeOptions}
                             </Select>
                         )}
                     </Form.Item>
