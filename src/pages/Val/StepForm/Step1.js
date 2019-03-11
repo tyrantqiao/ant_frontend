@@ -50,9 +50,12 @@ class Step1 extends React.PureComponent {
             });
         };
         // 当选择框获取焦点时，则调用列表获取
-        const handleFocus = () => {
+        const onNodesFocus = () => {
             const {dispatch} = this.props;
             dispatch({type: 'val/getNodes'});
+            this.setState({
+              nodes: data.nodes,
+            })
         };
         return (
             <Fragment>
@@ -131,11 +134,11 @@ class Step1 extends React.PureComponent {
                                 }
                             ]
                         })(
-                            <Select placeholder="请选择数据节点node" onFocus={handleFocus}>
+                            <Select value={this.data.nodes} placeholder="请选择数据节点node" onFocus={onNodesFocus}>
                                 {data
                                     .nodes
                                     .map(node => (
-                                        <Option key={node.id} value={node.id}>
+                                        <Option key={node.id}>
                                             {node.node_name}
                                         </Option>
                                     ))}

@@ -71,7 +71,10 @@ export default {
         save(state, {payload}) {
             return {
                 ...state,
-                ...payload
+                step: {
+                    ...state.step,
+                    ...payload
+                }
             };
         },
         saveStepFormData(state, {payload}) {
