@@ -93,11 +93,10 @@ class Step1 extends React.PureComponent {
                     {/* 数据提交时间 */}
                     <Form.Item {...formItemLayout} label="数据记录时间">
                         {getFieldDecorator('recordTime', {
-                            initialValue: data.recordTime,
                             rules: [
                                 {
                                     required: true,
-                                    message: '请输入数据记录时间'
+                                    message: formatMessage('请输入记录时间')
                                 }
                             ]
                         })(<DatePicker showTime format="YYYY-MM-DD HH:mm:ss"/>)}
