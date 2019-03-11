@@ -23,7 +23,13 @@ export default {
                     "node_type": "temperature",
                     "maxVal": 2,
                     "minVal": 22
-                }, 
+                }, {
+                    "id": 2,
+                    "node_name": "temperature_node_1",
+                    "node_type": "temperature",
+                    "maxVal": 10,
+                    "minVal": 1
+                }
             ]
         }
     },
@@ -65,10 +71,7 @@ export default {
         save(state, {payload}) {
             return {
                 ...state,
-                step: {
-                    ...state.step,
-                    ...payload
-                }
+                ...payload
             };
         },
         saveStepFormData(state, {payload}) {
