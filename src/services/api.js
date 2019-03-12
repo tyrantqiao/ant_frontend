@@ -2,7 +2,7 @@ import { stringify } from 'qs';
 import request from '@/utils/request';
 
 // django启动的平台连接
-let backend="http://127.0.0.1:8001";
+let backend = '/django';
 
 export async function queryProjectNotice() {
   return request('/api/project/notice');
@@ -46,15 +46,13 @@ export async function updateRule(params = {}) {
   });
 }
 
-
-// 用来给val/stepForm提交数据管理的请求表单，将会向后端8001/docs发出请求
-export async function submitValForm(params) {
+// 用来给values/stepForm提交数据管理的请求表单，将会向后端8001/docs发出请求
+export async function submitValuesForm(params) {
   return request(`${backend}/api/data/`, {
     method: 'POST',
     body: params,
   });
 }
-
 
 // 用来给node/stepForm提交数据节点管理的请求表单，将会向后端8001/docs发出请求
 export async function submitNodeForm(params) {
@@ -66,7 +64,7 @@ export async function submitNodeForm(params) {
 
 // 给val页获取nodes 返回list的形式
 export async function getNodes() {
-  return request(`${backend}/api/nodes`);
+  return request(`${backend}/api/nodes/`);
 }
 
 export async function fakeSubmitForm(params) {

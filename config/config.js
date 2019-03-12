@@ -80,13 +80,16 @@ export default {
     '@antv/data-set': 'DataSet',
     bizcharts: 'BizCharts',
   },
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
+  // 挂本地服务器代理，防止跨域请求，通过本地前端服务器向后端服务器发送请求
+  // 同时由于这里这里是以django作为统一需要修改的请求，而django实际上并不是真正的请求名字
+  // 所以做了pathRewrite把它修改掉了
+  proxy: {
+    '/django/': {
+      target: 'http://155.138.196.145:8001/',
+      changeOrigin: true,
+      pathRewrite: { '^/django': '' },
+    },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,

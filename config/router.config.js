@@ -46,34 +46,34 @@ export default [
       },
       // 数据页
       {
-        path: '/val',
+        path: '/values',
         icon: 'form',
-        name: 'val',
+        name: 'values',
         routes: [
           {
-            path: '/val/step-form',
+            path: '/values/step-form',
             name: 'valStepform',
-            component: './Val/StepForm',
+            component: './Values/StepForm',
             hideChildrenInMenu: true,
             routes: [
               {
-                path: '/val/step-form',
-                redirect: '/val/step-form/info',
+                path: '/values/step-form',
+                redirect: '/values/step-form/info',
               },
               {
-                path: '/val/step-form/info',
+                path: '/values/step-form/info',
                 name: 'info',
-                component: './Val/StepForm/Step1',
+                component: './Values/StepForm/Step1',
               },
               {
-                path: '/val/step-form/confirm',
+                path: '/values/step-form/confirm',
                 name: 'confirm',
-                component: './Val/StepForm/Step2',
+                component: './Values/StepForm/Step2',
               },
               {
-                path: '/val/step-form/result',
+                path: '/values/step-form/result',
                 name: 'result',
-                component: './Val/StepForm/Step3',
+                component: './Values/StepForm/Step3',
               },
             ],
           },
