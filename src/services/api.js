@@ -54,6 +54,15 @@ export async function submitValuesForm(params) {
   });
 }
 
+// 用来给node/submitListForm提交数据节点管理的请求表单，将会向后端8001/docs发出请求
+// TODO用于这里操作可能不同，要看看如何做出修改
+export async function submitListForm(params) {
+  return request(`${backend}/api/nodes/`, {
+    method: 'POST',
+    body: params,
+  });
+}
+
 // 用来给node/stepForm提交数据节点管理的请求表单，将会向后端8001/docs发出请求
 export async function submitNodeForm(params) {
   return request(`${backend}/api/nodes/`, {
