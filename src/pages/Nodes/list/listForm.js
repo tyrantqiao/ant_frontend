@@ -9,8 +9,9 @@ import {
     Divider,
     Tag
 } from 'antd';
+// 根据router.config.jd生成的路由表存在于pages/.umi下
 import router from 'umi/router';
-import styles from './style.less';
+import styles from './TableList.less';
 
 const {Option} = Select;
 
@@ -24,11 +25,10 @@ const formItemLayout = {
 };
 
 // connect属于dva的语法糖，用于将数据绑定起来 这里就应该是负责连接models文件，以文件名形式绑定
-@connect(({node}) => ({data: node.list}))
+@connect(({node}) => ({data: node.list, nodes: node.nodes}))
 // 这样包装后的组件会自带 this.props.form 属性
 @Form.create()
-class Step1 extends React.PureComponent {
-
+class ListForm extends React.PureComponent {
     state = {
         pagination: {},
         loading: false
@@ -46,14 +46,22 @@ class Step1 extends React.PureComponent {
         pager.current = pagination.current;
         this.setState({pagination: pager});
         this.fetch({results: pagination.pageSize, page: pagination.current, sortField: sorter.field, sortOrder: sorter.order});
-    }
+    };
 
     fetch = () => {
         this.setState({loading: true});
-        dispatch('/node/getNodes');
-        pagination=Object.keys(nodes).length;
-        this.setState({loading: false,  pagination});
-    }
+        this.getNodes();
+        this.pagination = Object
+            .keys(this.props.nodes)
+            .length;
+        this.setState({loading: false});
+    };
+
+    getNodes = () => {
+        this
+            .props
+            .dispatch({type: 'node/getNodesList'});
+    };
 
     render() {
         // form是表单的对象，下面两个属性为form的属性，与表单绑定以及字段校验
@@ -76,8 +84,8 @@ class Step1 extends React.PureComponent {
                     {/* 展示数据 */}
                     <Table
                         columns={data}
-                        rowKey={record => record.login.uuid}
-                        dataSource={nodes}
+                        rowKey={record => record.uid}
+                        dataSource={this.props.nodes}
                         pagination={this.state.pagination}
                         loading={this.state.loading}
                         onChange={this.handleTableChange}/>
@@ -88,13 +96,11 @@ class Step1 extends React.PureComponent {
                 <div className={styles.desc}>
                     <h3>数据节点列表展示</h3>
                     <h4>同时也是数据节点列表的管理</h4>
-                    <p>
-                        是一个管理界面，将会有增删更改的能力。
-                    </p>
+                    <p>是一个管理界面，将会有增删更改的能力。</p>
                 </div>
             </Fragment>
         );
     }
 }
 
-export default Step1;
+export default ListForm;

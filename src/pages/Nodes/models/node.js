@@ -1,7 +1,7 @@
 import {routerRedux} from 'dva/router';
 import {message} from 'antd';
 // 需要引入api的函数 error
-import {fakeSubmitForm, submitNodeForm, submitListForm} from '@/services/api';
+import {fakeSubmitForm, submitNodeForm, submitListForm, getNodes} from '@/services/api';
 
 export default {
     // model的定义名字
@@ -34,17 +34,31 @@ export default {
                 // 迟点加个搜索功能
                 width: '20%'
             }, {
-                title: 'MaxVal',
-                dataIndex: 'maxVal',
-                width: '20%'
-            }, {
                 title: 'MinVal',
                 dataIndex: 'minVal',
+                width: '20%'
+            }, {
+                title: 'MaxVal',
+                dataIndex: 'maxVal',
                 width: '20%'
             }
         ],
         pagination: {},
-        nodes: []
+        nodes: [
+            {
+                "id": 1,
+                "node_name": "temperature_1",
+                "node_type": "temperature",
+                "maxVal": 25,
+                "minVal": 22
+            }, {
+                "id": 2,
+                "node_name": "temperature_node_1",
+                "node_type": "temperature",
+                "maxVal": 10,
+                "minVal": 1
+            }
+        ]
     },
 
     effects : {
@@ -69,9 +83,9 @@ export default {
             yield put(routerRedux.push('/node/list-form/result'));
         },
         // 获取nodes
-        *getNodes(_, {call, put}) {
+        *getNodesList(_, {call, put}) {
             const nodesList = yield call(getNodes, _);
-            yield put({type: 'save', payload: nodesList});
+            yield put({type: 'saveNodes', payload: nodesList});
         }
     },
 
@@ -99,12 +113,13 @@ export default {
                 }
             };
         },
-        save(state, {payload: nodesList}) {
+        // 同时应注意payload中定义的变量名不能与前面effects定义的一样，不能将无法传参数进来
+        saveNodes(state, {payload: newNodes}) {
             return {
                 // 保存原来的state
                 ...state,
                 // 覆盖掉state的nodes数据
-                nodes: nodesList
+                nodes: newNodes
             };
         }
     }

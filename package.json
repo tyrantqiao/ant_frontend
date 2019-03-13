@@ -72,6 +72,7 @@
     "check-prettier": "^1.0.1",
     "cross-env": "^5.2.0",
     "cross-port-killer": "^1.0.1",
+    "cz-conventional-changelog": "^2.1.0",
     "enzyme": "^3.9.0",
     "eslint": "^5.13.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -138,6 +139,11 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint-staged"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }

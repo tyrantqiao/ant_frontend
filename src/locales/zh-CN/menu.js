@@ -1,4 +1,6 @@
 export default {
+  // 修改逻辑: 首先渲染router.config.js的路由，菜单页上遵循menu.开头
+  // 其次就是root路由的name，再到子节点name
   'menu.home': '首页',
   'menu.login': '登录',
   'menu.register': '注册',
@@ -9,14 +11,13 @@ export default {
   'menu.dashboard.workplace': '工作台',
   // 设置页面导航栏的中文内容
   'menu.node': '数据节点页',
-  'menu.node.basicform': '基础表单',
   'menu.node.nodeStepform': '管理数据节点',
   'menu.node.nodeStepform.info': '管理数据节点（填写数据节点信息）',
   'menu.node.nodeStepform.confirm': '管理数据节点（确认表单信息）',
   'menu.node.nodeStepform.result': '管理数据节点（完成）',
+  'menu.node.nodeListform': '数据列表页',
   // 设置数据页的中文内容
   'menu.values': '数据页',
-  'menu.values.basicform': '基础表单',
   'menu.values.valStepform': '管理数据',
   'menu.values.valStepform.info': '管理数据（填写数据信息）',
   'menu.values.valStepform.confirm': '管理数据（确认表单信息）',

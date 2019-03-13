@@ -10,10 +10,11 @@ export default {
   // node description
   'menu.node': 'Data Nodes Page',
   'menu.node.basicform': 'Basic Form',
-  'menu.node.nodeStepform': 'Manage Data node',
+  'menu.node.nodeStepform': 'Manage node',
   'menu.node.nodeStepform.info': 'Request Form（Fill in node information）',
   'menu.node.nodeStepform.confirm': 'Request Form（Confirm node information）',
   'menu.node.nodeStepform.result': 'Request Form（Completed）',
+  'menu.node.nodeListform': 'Manage nodes List',
   // data description
   'menu.values': 'Data vals Page',
   'menu.values.basicform': 'Basic Form',
