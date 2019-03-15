@@ -4,26 +4,7 @@ import { Icon, List } from 'antd';
 
 class BindingView extends Component {
   getData = () => [
-    {
-      title: formatMessage({ id: 'app.settings.binding.taobao' }, {}),
-      description: formatMessage({ id: 'app.settings.binding.taobao-description' }, {}),
-      actions: [
-        <a>
-          <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
-        </a>,
-      ],
-      avatar: <Icon type="taobao" className="taobao" />,
-    },
-    {
-      title: formatMessage({ id: 'app.settings.binding.alipay' }, {}),
-      description: formatMessage({ id: 'app.settings.binding.alipay-description' }, {}),
-      actions: [
-        <a>
-          <FormattedMessage id="app.settings.binding.bind" defaultMessage="Bind" />
-        </a>,
-      ],
-      avatar: <Icon type="alipay" className="alipay" />,
-    },
+    // 账号绑定
     {
       title: formatMessage({ id: 'app.settings.binding.dingding' }, {}),
       description: formatMessage({ id: 'app.settings.binding.dingding-description' }, {}),

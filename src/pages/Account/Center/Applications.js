@@ -13,33 +13,31 @@ class Center extends PureComponent {
     const {
       list: { list },
     } = this.props;
+    // 用于给下拉框做拓展链接页面
     const itemMenu = (
       <Menu>
         <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="https://www.alipay.com/">
-            1st menu item
+          <a target="_blank" rel="noopener noreferrer" href="https://tyrantqiao.com/">
+            个人博客
           </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="https://www.taobao.com/">
-            2nd menu item
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/tyrantqiao/">
+            个人GitHub
           </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="https://www.tmall.com/">
-            3d menu item
+          <a target="_blank" rel="noopener noreferrer" href="https://pro.ant.design/docs/server-cn/">
+            ant-design模板
           </a>
         </Menu.Item>
       </Menu>
     );
+    // 应用页卡片Info内容
     const CardInfo = ({ activeUser, newUser }) => (
       <div className={stylesApplications.cardInfo}>
         <div>
-          <p>活跃用户</p>
+          <p>下载次数</p>
           <p>{activeUser}</p>
         </div>
         <div>
-          <p>新增用户</p>
+          <p>新增下载</p>
           <p>{newUser}</p>
         </div>
       </div>

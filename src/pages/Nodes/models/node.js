@@ -1,7 +1,5 @@
 import { routerRedux } from 'dva/router';
 import { message, Tag, Divider } from 'antd';
-// test why get method
-import axios from 'axios';
 // 需要引入api的函数 error
 import { submitNodeForm, submitListForm, getNodes, deleteNode, updateNode } from '@/services/api';
 
@@ -24,15 +22,8 @@ export default {
         id: 1,
         node_name: 'temperature_1',
         node_type: 'temperature',
-        maxVal: 25,
         minVal: 22,
-      },
-      {
-        id: 2,
-        node_name: 'temperature_node_1',
-        node_type: 'temperature',
-        maxVal: 10,
-        minVal: 1,
+        maxVal: 25,
       },
     ],
   },
@@ -46,13 +37,6 @@ export default {
     },
     // 删除节点
     *deleteNode({ payload }, { call, put }) {
-      // axios.delete("http://155.138.196.145:8001/api/nodes/1/");
-      // fetch("http://155.138.196.145:8001/api/nodes/11/", {
-      //     method: 'DELETE',
-      //     headers: {
-      //         "Content-Type": "application/json"
-      //     },
-      // });
       yield call(deleteNode, payload.id);
     },
     // 更新节点
