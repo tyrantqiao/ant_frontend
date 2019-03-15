@@ -84,8 +84,8 @@ export default {
   // 同时由于这里这里是以django作为统一需要修改的请求，而django实际上并不是真正的请求名字
   // 所以做了pathRewrite把它修改掉了
   proxy: {
-    '/django/': {
-      target: 'http://155.138.196.145:8001/',
+    '/django': {
+      target: 'http://155.138.196.145:8001',
       changeOrigin: true,
       pathRewrite: { '^/django': '' },
     },
