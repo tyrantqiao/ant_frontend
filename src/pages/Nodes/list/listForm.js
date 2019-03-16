@@ -152,7 +152,7 @@ class ListForm extends React.PureComponent {
                                             {rowData => (
                                                 <a
                                                     href="javascript:;"
-                                                    onClick={() => this.save(rowData, record.key)}
+                                                    onClick={() => this.save(rowData, record.id)}
                                                     style={{
                                                     marginRight: 8
                                                 }}>
@@ -177,7 +177,9 @@ class ListForm extends React.PureComponent {
     }
 
     // 表格可编辑行，是通过存入当前编辑的id，然后再将表格对应行id进行比较，目前是以id作为key来设置的，暂时用toString()先
-    isEditing = record => record.id.toString() === this.state.editingKey;
+    isEditing = record => record
+        .id
+        .toString() === this.state.editingKey;
 
     // 当组件开始渲染时，获取数据
     componentDidMount() {
@@ -194,21 +196,12 @@ class ListForm extends React.PureComponent {
             if (error) {
                 return;
             }
-            const newData = [...this.state.data];
-            console.log(newData);
-            const index = newData.findIndex(item => key === item.key);
-            if (index > -1) {
-                const item = newData[index];
-                newData.splice(index, 1, {
-                    ...item,
-                    ...row
-                });
-                this.setState({editingKey: ''});
-            } else {
-                newData.push(row);
-                this.setState({editingKey: ''});
+            row = {
+                ...row,
+                id: key
             }
-            this.saveNodeRow(newData);
+            this.setState({editingKey: ''});
+            this.saveNodeRow(row);
         });
     }
 
@@ -226,13 +219,13 @@ class ListForm extends React.PureComponent {
         this.fetch();
     };
 
-    // 更改每行node的内容
+    // 更改每行node的内容,装值时要用payload装过去
     saveNodeRow = rowNode => {
         this
             .props
-            .dispatch({type: 'node/updateNode', rowNode: rowNode[0]});
+            .dispatch({type: 'node/updateNode', payload: rowNode});
         // 延迟是给delete完成后再次调度获得列表数据
-        delay(8000);
+        delay(10000);
         this.fetch();
     }
 

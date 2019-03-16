@@ -1,7 +1,7 @@
 import {routerRedux} from 'dva/router';
 import {message, Tag, Divider} from 'antd';
 // 需要引入api的函数 error
-import {submitNodeForm, submitListForm, getNodes, deleteNode, updateNode} from '@/services/api';
+import {submitNodeForm, getNodes, deleteNode, updateNode} from '@/services/api';
 
 export default {
     // model的定义名字
