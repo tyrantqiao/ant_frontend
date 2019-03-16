@@ -3,20 +3,11 @@ import fetch from 'dva/fetch';
 import request from '@/utils/request';
 
 // django启动的平台连接
-let backend = '/django';
+const backend = '/django';
 
 // 用来给values/stepForm提交数据管理的请求表单，将会向后端8001/docs发出请求
 export async function submitValuesForm(params) {
     return request(`${backend}/api/data/`, {
-        method: 'POST',
-        body: params
-    });
-}
-
-// 用来给node/submitListForm提交数据节点管理的请求表单，将会向后端8001/docs发出请求
-// TODO用于这里操作可能不同，要看看如何做出修改
-export async function submitListForm(params) {
-    return request(`${backend}/api/nodes/`, {
         method: 'POST',
         body: params
     });

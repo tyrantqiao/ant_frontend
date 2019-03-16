@@ -3,8 +3,7 @@ import {connect} from 'dva';
 import {
     Form,
     Input,
-    Button,
-    Select,
+    InputNumber,
     Table,
     Divider,
     Tag,
@@ -14,105 +13,208 @@ import {
 import router from 'umi/router';
 import styles from './TableList.less';
 import {delay} from 'q';
+// 可编辑table
 
-const {Option} = Select;
+const FormItem = Form.Item;
+const EditableContext = React.createContext();
 
-const formItemLayout = {
-    labelCol: {
-        span: 5
-    },
-    wrapperCol: {
-        span: 19
+const EditableRow = ({
+    form,
+    index,
+    ...props
+}) => (
+    <EditableContext.Provider value={form}>
+        <tr {...props}/>
+    </EditableContext.Provider>
+);
+
+const EditableFormRow = Form.create()(EditableRow);
+
+class EditableCell extends React.Component {
+    getInput = () => {
+        if (this.props.inputType === 'number') {
+            return <InputNumber/>;
+        }
+        return <Input/>;
+    };
+
+    render() {
+        const {
+            editing,
+            dataIndex,
+            title,
+            inputType,
+            record,
+            index,
+            ...restProps
+        } = this.props;
+        return (
+            <EditableContext.Consumer>
+                {(form) => {
+                    const {getFieldDecorator} = form;
+                    return (
+                        <td {...restProps}>
+                            {editing
+                                ? (
+                                    <FormItem
+                                        style={{
+                                        margin: 0
+                                    }}>
+                                        {getFieldDecorator(dataIndex, {
+                                            rules: [
+                                                {
+                                                    required: true,
+                                                    message: `Please Input ${title}!`
+                                                }
+                                            ],
+                                            initialValue: record[dataIndex]
+                                        })(this.getInput())}
+                                    </FormItem>
+                                )
+                                : restProps.children}
+                        </td>
+                    );
+                }}
+            </EditableContext.Consumer>
+        );
     }
-};
+}
 
 // connect属于dva的语法糖，用于将数据绑定起来 这里就应该是负责连接models文件，以文件名形式绑定
 @connect(({node}) => ({nodes: node.nodes}))
-// 这样包装后的组件会自带 this.props.form 属性
-@Form.create()
+// 这样包装后的组件会自带 this.props.form 属性 @Form.create()
 class ListForm extends React.PureComponent {
-    // columns只是用来渲染表格初始状态的，所以只要在page页定义即可，数据源在定义在models中
-    list = [
-        {
-            title: 'Node_name',
-            dataIndex: 'node_name',
-            width: '20%',
-            editable: true
-        }, {
-            title: 'Id',
-            dataIndex: 'id',
-            sorter: true,
-            width: '10%'
-        }, {
-            title: 'Node_type',
-            dataIndex: 'node_type',
-            render: node_type => (
-                <span>
-                    <Tag
-                        color={node_type.length > 5
-                        ? 'geekblue'
-                        : 'green'}
-                        key={node_type}>
-                        {node_type.toUpperCase()}
-                    </Tag>
-                </span>
-            ),
-            width: '20%',
-            editable: true
-        }, {
-            title: 'MinVal',
-            dataIndex: 'minVal',
-            width: '10%',
-            editable: true
-        }, {
-            title: 'MaxVal',
-            dataIndex: 'maxVal',
-            width: '10%',
-            editable: true
-        }, {
-            title: 'Action',
-            key: 'action',
-            render: (text, record) => (
-                <span>
-                    <Popconfirm title="确定删除?" onConfirm={() => this.deleteNode({id: record.id})}>
-                        <a href="javascript:;">
-                            Delete
-                        </a>
-                    </Popconfirm>
-                    <Divider type="vertical"/> {/* 确认框 */}
-                    <a href="javascript:;" onClick={() => this.updateNode(record)}>
-                        Update
-                    </a>
-                </span>
-            )
-        }
-    ];
-    state = {
-        pagination: {},
-        loading: false
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: this.props.nodes,
+            editingKey: ''
+        };
+        // columns只是用来渲染表格初始状态的，所以只要在page页定义即可，数据源在定义在models中
+        this.columns = [
+            {
+                title: '节点名字',
+                dataIndex: 'node_name',
+                width: '20%',
+                editable: true
+            }, {
+                title: '节点id',
+                dataIndex: 'id',
+                sorter: true,
+                width: '10%'
+            }, {
+                title: '节点类型',
+                dataIndex: 'node_type',
+                render: node_type => (
+                    <span>
+                        <Tag
+                            color={node_type.length > 5
+                            ? 'geekblue'
+                            : 'green'}
+                            key={node_type}>
+                            {node_type.toUpperCase()}
+                        </Tag>
+                    </span>
+                ),
+                width: '20%',
+                editable: true
+            }, {
+                title: '最小值',
+                dataIndex: 'minVal',
+                width: '10%',
+                editable: true
+            }, {
+                title: '最大值',
+                dataIndex: 'maxVal',
+                width: '10%',
+                editable: true
+            }, {
+                title: 'Action',
+                dataIndex: 'action',
+                render: (text, record) => {
+                    const editable = this.isEditing(record);
+                    return (
+                        <span>
+                            <Popconfirm title="确定删除?" onConfirm={() => this.deleteNode({id: record.id})}>
+                                <a href="javascript:;">
+                                    Delete
+                                </a>
+                            </Popconfirm>
+                            <Divider type="vertical"/> {/* 确认框 */}
+                            {/* <a href="javascript:;" onClick={() => this.updateNode(record)}>
+                            Update
+                        </a> */}
+                            {editable
+                                ? (
+                                    <span>
+                                        <EditableContext.Consumer>
+                                            {rowData => (
+                                                <a
+                                                    href="javascript:;"
+                                                    onClick={() => this.save(rowData, record.key)}
+                                                    style={{
+                                                    marginRight: 8
+                                                }}>
+                                                    Save
+                                                </a>
+                                            )}
+                                        </EditableContext.Consumer>
+                                        <Popconfirm title="确定取消?" onConfirm={() => this.cancel(record.id.toString())}>
+                                            <a>Cancel</a>
+                                        </Popconfirm>
+                                    </span>
+                                )
+                                : (
+                                    <a onClick={() => this.edit(record.id.toString())}>Edit</a>
+                                )}
+
+                        </span>
+                    )
+                }
+            }
+        ];
+    }
+
+    // 表格可编辑行，是通过存入当前编辑的id，然后再将表格对应行id进行比较，目前是以id作为key来设置的，暂时用toString()先
+    isEditing = record => record.id.toString() === this.state.editingKey;
 
     // 当组件开始渲染时，获取数据
     componentDidMount() {
         this.fetch();
     }
 
-    handleTableChange = (pagination, sorter) => {
-        const pager = {
-            ...this.state.pagination
-        };
-        pager.current = pagination.current;
-        this.setState({pagination: pager});
-        this.fetch({results: pagination.pageSize, page: pagination.current, sortField: sorter.field, sortOrder: sorter.order});
+    cancel = () => {
+        this.setState({editingKey: ''});
     };
 
-    // 更新node，更新完后刷新数据列表
-    updateNode = params => {
-        this
-            .props
-            .dispatch({type: 'node/updateNode', payload: params});
-        this.fetch();
-    };
+    // TODO 修改id
+    save(form, key) {
+        form.validateFields((error, row) => {
+            if (error) {
+                return;
+            }
+            const newData = [...this.state.data];
+            console.log(newData);
+            const index = newData.findIndex(item => key === item.key);
+            if (index > -1) {
+                const item = newData[index];
+                newData.splice(index, 1, {
+                    ...item,
+                    ...row
+                });
+                this.setState({editingKey: ''});
+            } else {
+                newData.push(row);
+                this.setState({editingKey: ''});
+            }
+            this.saveNodeRow(newData);
+        });
+    }
+
+    edit(key) {
+        this.setState({editingKey: key});
+    }
 
     // 删除node，更新完后刷新数据列表
     deleteNode = id => {
@@ -123,6 +225,16 @@ class ListForm extends React.PureComponent {
         delay(8000);
         this.fetch();
     };
+
+    // 更改每行node的内容
+    saveNodeRow = rowNode => {
+        this
+            .props
+            .dispatch({type: 'node/updateNode', rowNode: rowNode[0]});
+        // 延迟是给delete完成后再次调度获得列表数据
+        delay(8000);
+        this.fetch();
+    }
 
     fetch = () => {
         this.setState({loading: true});
@@ -138,26 +250,50 @@ class ListForm extends React.PureComponent {
 
     render() {
         // form是表单的对象，下面两个属性为form的属性，与表单绑定以及字段校验
-        const {form, dispatch} = this.props;
-        const {getFieldDecorator, validateFields} = form;
-        const onValidateForm = () => {
-            validateFields((err, values) => {
-                if (!err) {
-                    dispatch({
-                        // 看表单形式为添加还是删除，加入一个选择框
-                        type: 'node/saveListForm',
-                        payload: values
-                    });
-                }
-            });
+        const {dispatch} = this.props;
+
+        const components = {
+            body: {
+                row: EditableFormRow,
+                cell: EditableCell
+            }
         };
+
+        const columns = this
+            .columns
+            .map((col) => {
+                if (!col.editable) {
+                    return col;
+                }
+                return {
+                    ...col,
+                    onCell: record => ({
+                        record,
+                        inputType: col
+                            .dataIndex
+                            .indexOf('Val') > -1
+                            ? 'number'
+                            : 'text',
+                        dataIndex: col.dataIndex,
+                        title: col.title,
+                        editing: this.isEditing(record)
+                    })
+                };
+            });
         return (
             <Fragment>
                 <Form layout="horizontal" hideRequiredMark>
                     {/* 展示数据 */}
-                    <Table columns={this.list} // react规范要求rowKey需要选择唯一字段作为key，或者自建一个key出来
-                        // record则是每一行的记录
-                        rowKey={record => record.id} dataSource={this.props.nodes} pagination={this.state.pagination} loading={this.state.loading} onChange={this.handleTableChange}/>
+                    <Table
+                        components={components}
+                        bordered
+                        dataSource={this.props.nodes}
+                        rowKey={record => record.id}
+                        columns={columns}
+                        rowClassName="editable-row"
+                        pagination={{
+                        onChange: this.cancel
+                    }}/>
                 </Form>
                 <Divider style={{
                     margin: '40px 0 24px'
