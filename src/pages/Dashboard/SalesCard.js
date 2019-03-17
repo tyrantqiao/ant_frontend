@@ -12,7 +12,7 @@ const rankingListData = [];
 for (let i = 0; i < 7; i += 1) {
   rankingListData.push({
     title: formatMessage({ id: 'app.analysis.test' }, { no: i }),
-    total: 323234,
+    total: 23333,
   });
 }
 

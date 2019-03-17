@@ -9,9 +9,10 @@ import { MiniArea } from '@/components/Charts';
 
 const columns = [
   {
-    title: <FormattedMessage id="app.analysis.table.rank" defaultMessage="Rank" />,
-    dataIndex: 'index',
-    key: 'index',
+    title: <FormattedMessage id="app.analysis.table.id" defaultMessage="id" />,
+    dataIndex: 'id',
+    key: 'id',
+    sorter: (a, b) => a.id - b.id,
   },
   {
     title: (
@@ -47,12 +48,12 @@ const TopSearch = memo(({ loading, visitData2, searchData, dropdownGroup }) => (
     loading={loading}
     bordered={false}
     title={
-      <FormattedMessage id="app.analysis.online-top-search" defaultMessage="Online Top Search" />
+      <FormattedMessage id="app.analysis.top-history-search" defaultMessage="Top History Search" />
     }
     extra={dropdownGroup}
     style={{ marginTop: 24 }}
   >
-    <Row gutter={68}>
+    {/* <Row gutter={68}>
       <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
         <NumberInfo
           subTitle={
@@ -94,7 +95,7 @@ const TopSearch = memo(({ loading, visitData2, searchData, dropdownGroup }) => (
         />
         <MiniArea line height={45} data={visitData2} />
       </Col>
-    </Row>
+    </Row> */}
     <Table
       rowKey={record => record.index}
       size="small"

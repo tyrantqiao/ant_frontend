@@ -44,6 +44,11 @@ export async function getNodes() {
     return request(`${backend}/api/nodes/`);
 }
 
+// 以list的形式放回searchData
+export async function getSearchData() {
+    return request(`${backend}/api/searchData/`);
+}
+
 export async function fakeSubmitForm(params) {
     return request('/api/forms', {
         method: 'POST',

@@ -102,6 +102,7 @@ class ListForm extends React.PureComponent {
                 title: '节点id',
                 dataIndex: 'id',
                 sorter: true,
+                sorter: (a, b) => a.id - b.id,
                 width: '10%'
             }, {
                 title: '节点类型',
@@ -123,11 +124,13 @@ class ListForm extends React.PureComponent {
                 title: '最小值',
                 dataIndex: 'minVal',
                 width: '10%',
+                sorter: (a, b) => a.minVal - b.minVal,
                 editable: true
             }, {
                 title: '最大值',
                 dataIndex: 'maxVal',
                 width: '10%',
+                sorter: (a, b) => a.maxVal - b.maxVal,
                 editable: true
             }, {
                 title: 'Action',

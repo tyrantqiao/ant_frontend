@@ -25,7 +25,6 @@ class Analysis extends Component {
         const {dispatch} = this.props;
         this.reqRef = requestAnimationFrame(() => {
             dispatch({type: 'chart/fetch'});
-            dispatch({type: 'chart/fetchSearchData'});
         });
     }
 
