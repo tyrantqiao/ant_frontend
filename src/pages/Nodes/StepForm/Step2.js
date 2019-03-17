@@ -69,7 +69,6 @@ class Step2 extends React.PureComponent {
         </Form.Item>
         <Form.Item {...formItemLayout} className={styles.stepFormText} label="最大安全值">
           <span className={styles.number}>{data.maxVal}</span>
-          {/* <span className={styles.uppercase}>（{digitUppercase(data.amount)}）</span> */}
         </Form.Item>
         <Divider style={{ margin: '24px 0' }} />
         {/* {...props}  */}
