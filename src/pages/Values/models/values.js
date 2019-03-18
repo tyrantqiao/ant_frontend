@@ -1,7 +1,7 @@
 import {routerRedux} from 'dva/router';
 import {message} from 'antd';
 // 需要引入api的函数 error
-import {fakeSubmitForm, submitValuesForm, getNodes} from '@/services/api';
+import {fakeSubmitForm, submitValuesForm, getNodes, deleteData, updateData, getDatasList} from '@/services/api';
 
 export default {
     // model的定义名字
@@ -17,6 +17,16 @@ export default {
             safe: true,
             recordTime: '2000-03-14T11:45:00'
         },
+        datas: [
+            {   
+                id: 1,
+                nodeId: 20,
+                val: 10,
+                unit: 'm',
+                safe: true,
+                recordTime: '2000-03-14T11:45:00'
+            }
+        ],
         nodes: [
             {
                 id: 1,
@@ -51,6 +61,24 @@ export default {
             const latestNodes = yield call(getNodes, _);
             yield put({type: 'save', payload: latestNodes});
         },
+        // 删除节点
+        *deleteData({
+            payload
+        }, {call, put}) {
+            yield call(deleteData, payload.id);
+        },
+        // 更新节点
+        *updateData({
+            payload
+        }, {call, put}) {
+            yield call(updateData, payload, payload.id);
+        },
+        // 获取datas
+        *getDataList(_, {call, put}) {
+            const latestDatasList = yield call(getDatasList, _);
+            yield put({type: 'saveDatas', payload: latestDatasList});
+        }
+
     },
 
     // 保存分步表单的数据 ...是一个函数，将一个数组转化为用逗号分隔的参数序列 同时此处保存具体数据时，也要保证其他数据也会保存下来
@@ -70,6 +98,15 @@ export default {
                     ...state.step,
                     ...payload
                 }
+            };
+        },
+        // 同时应注意payload中定义的变量名不能与前面effects定义的一样，不能将无法传参数进来
+        saveDatas(state, {payload: newDatas}) {
+            return {
+                // 保存原来的state
+                ...state,
+                // 覆盖掉state的datas数据
+                datas: newDatas
             };
         }
     }

@@ -57,6 +57,11 @@ export default[
                 name: 'values',
                 routes: [
                     {
+                        path: '/values/list-form',
+                        name: 'valuesListform',
+                        component: './Values/list/ListForm'
+                    },
+                    {
                         path: '/values/step-form',
                         name: 'valStepform',
                         component: './Values/StepForm',
@@ -115,49 +120,6 @@ export default[
                                 path: '/node/step-form/result',
                                 name: 'result',
                                 component: './Nodes/StepForm/Step3'
-                            }
-                        ]
-                    }
-                ]
-            },
-            // list
-            {
-                path: '/list',
-                icon: 'table',
-                name: 'list',
-                routes: [
-                    {
-                        path: '/list/table-list',
-                        name: 'searchtable',
-                        component: './List/TableList'
-                    }, {
-                        path: '/list/basic-list',
-                        name: 'basiclist',
-                        component: './List/BasicList'
-                    }, {
-                        path: '/list/card-list',
-                        name: 'cardlist',
-                        component: './List/CardList'
-                    }, {
-                        path: '/list/search',
-                        name: 'searchlist',
-                        component: './List/List',
-                        routes: [
-                            {
-                                path: '/list/search',
-                                redirect: '/list/search/articles'
-                            }, {
-                                path: '/list/search/articles',
-                                name: 'articles',
-                                component: './List/Articles'
-                            }, {
-                                path: '/list/search/projects',
-                                name: 'projects',
-                                component: './List/Projects'
-                            }, {
-                                path: '/list/search/applications',
-                                name: 'applications',
-                                component: './List/Applications'
                             }
                         ]
                     }

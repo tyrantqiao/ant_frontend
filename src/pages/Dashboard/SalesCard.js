@@ -37,6 +37,7 @@ const SalesCard = memo(
                   <FormattedMessage id="app.analysis.all-year" defaultMessage="All Year" />
                 </a>
               </div>
+              {/* 时间选择，这里要做一个时间查询 */}
               <RangePicker
                 value={rangePickerValue}
                 onChange={handleRangePickerChange}

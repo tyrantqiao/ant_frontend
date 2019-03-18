@@ -11,6 +11,7 @@ import {
     Divider,
     Checkbox
 } from 'antd';
+import moment from 'moment';
 import router from 'umi/router';
 import styles from './style.less';
 
@@ -42,7 +43,7 @@ class Step1 extends React.PureComponent {
         const nodeOptions = this
             .props
             .nodes
-            .map(node => <Option key={node.id}>{node.id}</Option>);
+            .map(node => <Option key={node.id}>{node.node_name}</Option>);
         const onValidateForm = () => {
             validateFields((err, values) => {
                 if (!err) {

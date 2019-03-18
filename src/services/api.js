@@ -44,6 +44,29 @@ export async function getNodes() {
     return request(`${backend}/api/nodes/`);
 }
 
+// 更新data
+export async function updateData(params, id) {
+    return request(`${backend}/api/data/${id}/`, {
+        method: 'PUT',
+        body: params
+    });
+}
+
+// 删除data，以id为请求参数
+export async function deleteData(id) {
+    return request(`${backend}/api/data/${id}/`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
+
+// 以list的形式返回datas
+export async function getDatasList() {
+    return request(`${backend}/api/data/`);
+}
+
 // 以list的形式放回searchData
 export async function getSearchData() {
     return request(`${backend}/api/searchData/`);

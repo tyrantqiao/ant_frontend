@@ -6,10 +6,14 @@ import {
     InputNumber,
     Table,
     Divider,
+    DatePicker,
+    TimePicker,
     Tag,
     Popconfirm
 } from 'antd';
 // 根据router.config.jd生成的路由表存在于pages/.umi下
+import {formatMessage, FormattedMessage} from 'umi/locale';
+import moment from 'moment';
 import router from 'umi/router';
 import styles from './TableList.less';
 import {delay} from 'q';
@@ -81,56 +85,73 @@ class EditableCell extends React.Component {
 }
 
 // connect属于dva的语法糖，用于将数据绑定起来 这里就应该是负责连接models文件，以文件名形式绑定
-@connect(({node}) => ({nodes: node.nodes}))
+@connect(({values}) => ({datas: values.datas}))
 // 这样包装后的组件会自带 this.props.form 属性 @Form.create()
 class ListForm extends React.PureComponent {
     constructor(props) {
         super(props);
 
         this.state = {
-            data: this.props.nodes,
+            data: this.props.datas,
             editingKey: ''
         };
         // columns只是用来渲染表格初始状态的，所以只要在page页定义即可，数据源在定义在models中
         this.columns = [
             {
-                title: '节点名字',
-                dataIndex: 'node_name',
-                width: '20%',
-                editable: true
+                title: '数据id',
+                dataIndex: 'id',
+                width: '10%',
+                sorter: (a, b) => a.id - b.id
             }, {
                 title: '节点id',
-                dataIndex: 'id',
-                sorter: true,
-                sorter: (a, b) => a.id - b.id,
+                dataIndex: 'nodeId',
+                sorter: (a, b) => a.nodeId - b.nodeId,
+                editable: true,
                 width: '10%'
             }, {
-                title: '节点类型',
-                dataIndex: 'node_type',
-                render: node_type => (
+                title: '数据值',
+                dataIndex: 'val',
+                sorter: (a, b) => a.val - b.val,
+                width: '10%',
+                editable: true
+            }, {
+                title: '单位',
+                dataIndex: 'unit',
+                width: '15%',
+                render: unit => (
                     <span>
                         <Tag
-                            color={node_type.length > 5
+                            color={unit.length > 5
                             ? 'geekblue'
                             : 'green'}
-                            key={node_type}>
-                            {node_type.toUpperCase()}
+                            key={unit}>
+                            {unit.toUpperCase()}
                         </Tag>
                     </span>
                 ),
+                editable: true
+            }, {
+                title: '安全',
+                dataIndex: 'safe',
+                width: '10%',
+                render: safe => (
+                    <span>
+                        <Tag
+                            color={safe === true
+                            ? 'green'
+                            : 'red'}
+                            key={safe}>
+                            {safe
+                                .toString()
+                                .toUpperCase()}
+                        </Tag>
+                    </span>
+                ),
+                editable: true
+            }, {
+                title: '记录时间',
+                dataIndex: 'recordTime',
                 width: '20%',
-                editable: true
-            }, {
-                title: '最小值',
-                dataIndex: 'minVal',
-                width: '10%',
-                sorter: (a, b) => a.minVal - b.minVal,
-                editable: true
-            }, {
-                title: '最大值',
-                dataIndex: 'maxVal',
-                width: '10%',
-                sorter: (a, b) => a.maxVal - b.maxVal,
                 editable: true
             }, {
                 title: 'Action',
@@ -139,15 +160,12 @@ class ListForm extends React.PureComponent {
                     const editable = this.isEditing(record);
                     return (
                         <span>
-                            <Popconfirm title="确定删除?" onConfirm={() => this.deleteNode({id: record.id})}>
+                            <Popconfirm title="确定删除?" onConfirm={() => this.deleteData({id: record.id})}>
                                 <a href="javascript:;">
                                     Delete
                                 </a>
                             </Popconfirm>
                             <Divider type="vertical"/> {/* 确认框 */}
-                            {/* <a href="javascript:;" onClick={() => this.updateNode(record)}>
-                            Update
-                        </a> */}
                             {editable
                                 ? (
                                     <span>
@@ -204,7 +222,7 @@ class ListForm extends React.PureComponent {
                 id: key
             }
             this.setState({editingKey: ''});
-            this.saveNodeRow(row);
+            this.saveDataRow(row);
         });
     }
 
@@ -212,21 +230,21 @@ class ListForm extends React.PureComponent {
         this.setState({editingKey: key});
     }
 
-    // 删除node，更新完后刷新数据列表
-    deleteNode = id => {
+    // 删除Data，更新完后刷新数据列表
+    deleteData = id => {
         this
             .props
-            .dispatch({type: 'node/deleteNode', payload: id});
+            .dispatch({type: 'values/deleteData', payload: id});
         // 延迟是给delete完成后再次调度获得列表数据
         delay(8000);
         this.fetch();
     };
 
-    // 更改每行node的内容,装值时要用payload装过去
-    saveNodeRow = rowNode => {
+    // 更改每行data的内容,装值时要用payload装过去
+    saveDataRow = rowData => {
         this
             .props
-            .dispatch({type: 'node/updateNode', payload: rowNode});
+            .dispatch({type: 'values/updateData', payload: rowData});
         // 延迟是给delete完成后再次调度获得列表数据
         delay(10000);
         this.fetch();
@@ -234,14 +252,14 @@ class ListForm extends React.PureComponent {
 
     fetch = () => {
         this.setState({loading: true});
-        this.getNodes();
+        this.getData();
         this.setState({loading: false});
     };
 
-    getNodes = () => {
+    getData = () => {
         this
             .props
-            .dispatch({type: 'node/getNodesList'});
+            .dispatch({type: 'values/getDataList'});
     };
 
     render() {
@@ -267,7 +285,7 @@ class ListForm extends React.PureComponent {
                         record,
                         inputType: col
                             .dataIndex
-                            .indexOf('Val') > -1
+                            .indexOf('val') > -1
                             ? 'number'
                             : 'text',
                         dataIndex: col.dataIndex,
@@ -280,14 +298,8 @@ class ListForm extends React.PureComponent {
             <Fragment>
                 <Form layout="horizontal" hideRequiredMark>
                     {/* 展示数据 */}
-                    <Table
-                        components={components}
-                        // bordered
-                        dataSource={this.props.nodes}
-                        rowKey={record => record.id}
-                        columns={columns}
-                        rowClassName="editable-row"
-                        pagination={{
+                    <Table components={components} // bordered
+                        dataSource={this.props.datas} rowKey={record => record.id} columns={columns} rowClassName="editable-row" pagination={{
                         onChange: this.cancel
                     }}/>
                 </Form>
@@ -295,9 +307,9 @@ class ListForm extends React.PureComponent {
                     margin: '40px 0 24px'
                 }}/>
                 <div className={styles.desc}>
-                    <h3>数据节点列表展示</h3>
-                    <h4>同时也是数据节点列表的管理</h4>
-                    <p>是一个管理界面，将会有增删更改的能力。</p>
+                    <h3>数据列表展示</h3>
+                    <h4>同时也是数据列表的管理</h4>
+                    <p>是一个管理界面，有增删更改的能力。</p>
                 </div>
             </Fragment>
         );
