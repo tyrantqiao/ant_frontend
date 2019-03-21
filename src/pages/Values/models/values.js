@@ -1,7 +1,14 @@
 import {routerRedux} from 'dva/router';
 import {message} from 'antd';
 // 需要引入api的函数 error
-import {fakeSubmitForm, submitValuesForm, getNodes, deleteData, updateData, getDatasList} from '@/services/api';
+import {
+    fakeSubmitForm,
+    submitValuesForm,
+    getNodes,
+    deleteData,
+    updateData,
+    getDatasList
+} from '@/services/api';
 
 export default {
     // model的定义名字
@@ -18,7 +25,7 @@ export default {
             recordTime: '2000-03-14T11:45:00'
         },
         datas: [
-            {   
+            {
                 id: 1,
                 nodeId: 20,
                 val: 10,
@@ -78,7 +85,6 @@ export default {
             const latestDatasList = yield call(getDatasList, _);
             yield put({type: 'saveDatas', payload: latestDatasList});
         }
-
     },
 
     // 保存分步表单的数据 ...是一个函数，将一个数组转化为用逗号分隔的参数序列 同时此处保存具体数据时，也要保证其他数据也会保存下来

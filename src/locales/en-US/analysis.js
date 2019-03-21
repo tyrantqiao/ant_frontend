@@ -21,11 +21,13 @@ export default {
   'app.analysis.search-users': 'Search Users',
   'app.analysis.per-capita-search': 'Per Capita Search',
   'app.analysis.top-history-search': 'Top History Search',
+  // Proportion
   'app.analysis.the-proportion-of-sales': 'The Proportion Of Sales',
-  'app.analysis.channel.all': 'ALL',
+  'app.analysis.channel.other': 'Other',
   'app.analysis.channel.online': 'Online',
   'app.analysis.channel.stores': 'Stores',
-  'app.analysis.sales': 'Collect Data',
+  'app.analysis.sales': 'sales',
+  // 
   'app.analysis.traffic': 'Traffic',
   'app.analysis.table.id': 'Id',
   'app.analysis.table.search-keyword': 'Keyword',

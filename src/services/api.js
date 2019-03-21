@@ -1,6 +1,7 @@
 import {stringify} from 'qs';
 import fetch from 'dva/fetch';
 import request from '@/utils/request';
+import {async} from 'q';
 
 // django启动的平台连接
 const backend = '/django';
@@ -70,6 +71,46 @@ export async function getDatasList() {
 // 以list的形式放回searchData
 export async function getSearchData() {
     return request(`${backend}/api/searchData/`);
+}
+
+// 按list的形式返回data
+export async function getDataByTimescale(timescale, num) {
+    return request(`${backend}/api/data/getByTimescale/?timescale=${timescale}&num=${num}`);
+}
+
+// 按时间尺度分割返回count值
+export async function countSegmentedByTimescale(timescale, num) {
+    return request(`${backend}/api/data/segmentByTimescale/?timescale=${timescale}&num=${num}`);
+}
+
+// 返回count
+export async function countByTimescale(timescale, num) {
+    return request(`${backend}/api/data/countByTimescale/?timescale=${timescale}&num=${num}`);
+}
+
+// 添加订单
+export async function addOrder(params) {
+    return request(`${backend}/api/order/`, {
+        method: 'POST',
+        body: {
+            params
+        }
+    });
+}
+
+// 删除订单
+export async function deleteOrder(id) {
+    return request(`${backend}/api/order/${id}/`, {method: 'DELETE'});
+}
+
+// 返回不同类型的销售list
+export async function getCommodityByType(type) {
+    return request(`${backend}/commodity/type=${type}`)
+}
+
+// 返回list的商品
+export async function getCommodity() {
+    return request(`${backend}/commodity/`);
 }
 
 export async function fakeSubmitForm(params) {

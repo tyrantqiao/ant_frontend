@@ -26,6 +26,7 @@ class Analysis extends Component {
         this.reqRef = requestAnimationFrame(() => {
             dispatch({type: 'chart/fetch'});
             dispatch({type: 'chart/fetchSearchData'});
+            dispatch({type: 'chart/fetchSalesTypeData'});
         });
     }
 
@@ -83,18 +84,19 @@ class Analysis extends Component {
             salesTypeDataOnline,
             salesTypeDataOffline
         } = chart;
-        let salesPieData;
-        if (salesType === 'all') {
+        // 电商的type为1，门店为2，其他为3
+        let salesPieData=salesTypeData;
+        if (salesType === 'other') {
             salesPieData = salesTypeData;
         } else {
             salesPieData = salesType === 'online'
                 ? salesTypeDataOnline
                 : salesTypeDataOffline;
         }
+
         const menu = (
             <Menu>
-                <Menu.Item>操作一</Menu.Item>
-                <Menu.Item>操作二</Menu.Item>
+                <Menu.Item>自定义操作</Menu.Item>
             </Menu>
         );
 

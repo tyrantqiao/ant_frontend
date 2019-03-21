@@ -21,11 +21,13 @@ export default {
   'app.analysis.search-users': '搜索用户数',
   'app.analysis.per-capita-search': '人均搜索次数',
   'app.analysis.top-history-search': '历史最多搜索',
+  // ProportionSales
   'app.analysis.the-proportion-of-sales': '销售额类别占比',
-  'app.analysis.channel.all': '全部渠道',
-  'app.analysis.channel.online': '线上',
-  'app.analysis.channel.stores': '门店',
-  'app.analysis.sales': '数据量',
+  'app.analysis.channel.other': '其他',
+  'app.analysis.channel.online': '电商',
+  'app.analysis.channel.stores': '实体店',
+  'app.analysis.sales': '销售额',
+  // 
   'app.analysis.traffic': '客流量',
   'app.analysis.table.id': '序列号',
   'app.analysis.table.search-keyword': '搜索关键词',

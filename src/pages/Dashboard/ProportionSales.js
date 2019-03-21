@@ -23,14 +23,14 @@ const ProportionSales = memo(
           {dropdownGroup}
           <div className={styles.salesTypeRadio}>
             <Radio.Group value={salesType} onChange={handleChangeSalesType}>
-              <Radio.Button value="all">
-                <FormattedMessage id="app.analysis.channel.all" defaultMessage="ALL" />
-              </Radio.Button>
               <Radio.Button value="online">
                 <FormattedMessage id="app.analysis.channel.online" defaultMessage="Online" />
               </Radio.Button>
               <Radio.Button value="stores">
                 <FormattedMessage id="app.analysis.channel.stores" defaultMessage="Stores" />
+              </Radio.Button>
+              <Radio.Button value="other">
+                <FormattedMessage id="app.analysis.channel.other" defaultMessage="Other" />
               </Radio.Button>
             </Radio.Group>
           </div>
