@@ -21,13 +21,13 @@ for (let i = 0; i < fakeY2.length; i += 1) {
   });
 }
 
-const salesData = [];
-for (let i = 0; i < 12; i += 1) {
-  salesData.push({
-    x: `${i + 1}月`,
-    y: Math.floor(Math.random() * 1000) + 200,
-  });
-}
+// const salesData = [];
+// for (let i = 0; i < 12; i += 1) {
+//   salesData.push({
+//     x: `${i + 1}月`,
+//     y: Math.floor(Math.random() * 1000) + 200,
+//   });
+// }
 
 // const searchData = [];
 // for (let i = 0; i < 50; i += 1) {
@@ -183,7 +183,7 @@ radarOriginData.forEach(item => {
 const getFakeChartData = {
   visitData,
   visitData2,
-  salesData,
+  // salesData,
   // searchData,
   offlineData,
   offlineChartData,

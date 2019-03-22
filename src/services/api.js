@@ -78,9 +78,9 @@ export async function getDataByTimescale(timescale, num) {
     return request(`${backend}/api/data/getByTimescale/?timescale=${timescale}&num=${num}`);
 }
 
-// 按时间尺度分割返回count值
-export async function countSegmentedByTimescale(timescale, num) {
-    return request(`${backend}/api/data/segmentByTimescale/?timescale=${timescale}&num=${num}`);
+// 按时间尺度分割返回数据，当type为count时，返回月份和count值，目前只做了年份就是十二个月的切分
+export async function countSegmentedByTimescale(timescale, num, type) {
+    return request(`${backend}/data/segmentByTimescale/?timescale=${timescale}&num=${num}&type=${type}`);
 }
 
 // 返回count

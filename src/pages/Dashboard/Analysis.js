@@ -27,6 +27,14 @@ class Analysis extends Component {
             dispatch({type: 'chart/fetch'});
             dispatch({type: 'chart/fetchSearchData'});
             dispatch({type: 'chart/fetchSalesTypeData'});
+            dispatch({
+                type: 'chart/fetchSalesData',
+                payload: {
+                    timescale: 'year',
+                    num: '2019',
+                    type: 'count'
+                }
+            });
         });
     }
 
@@ -85,7 +93,7 @@ class Analysis extends Component {
             salesTypeDataOffline
         } = chart;
         // 电商的type为1，门店为2，其他为3
-        let salesPieData=salesTypeData;
+        let salesPieData = salesTypeData;
         if (salesType === 'other') {
             salesPieData = salesTypeData;
         } else {

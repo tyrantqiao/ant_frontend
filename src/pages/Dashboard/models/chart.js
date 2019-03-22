@@ -1,4 +1,4 @@
-import {fakeChartData, getSearchData, getDataByTimescale, getCommodity} from '@/services/api';
+import {fakeChartData, getSearchData, getDataByTimescale, getCommodity, countSegmentedByTimescale} from '@/services/api';
 
 export default {
     namespace : 'chart',
@@ -71,6 +71,17 @@ export default {
                 type: 'save',
                 payload: {
                     searchData: response
+                }
+            })
+        },
+        *fetchSalesData({
+            payload
+        }, {call, put}) {
+            const response = yield call(countSegmentedByTimescale, payload.timescale, payload.num, payload.type);
+            yield put({
+                type: 'save',
+                payload: {
+                    salesData: response
                 }
             })
         }
