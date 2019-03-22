@@ -8,7 +8,7 @@ import PageLoading from '@/components/PageLoading';
 import {AsyncLoadBizCharts} from '@/components/Charts/AsyncLoadBizCharts';
 
 const IntroduceRow = React.lazy(() => import ('./IntroduceRow'));
-const SalesCard = React.lazy(() => import ('./SalesCard'));
+const DatasCard = React.lazy(() => import ('./DatasCard'));
 const TopSearch = React.lazy(() => import ('./TopSearch'));
 const ProportionSales = React.lazy(() => import ('./ProportionSales'));
 const OfflineData = React.lazy(() => import ('./OfflineData'));
@@ -28,13 +28,19 @@ class Analysis extends Component {
             dispatch({type: 'chart/fetchSearchData'});
             dispatch({type: 'chart/fetchSalesTypeData'});
             dispatch({
-                type: 'chart/fetchSalesData',
+                type: 'chart/fetchnodesData',
                 payload: {
                     timescale: 'year',
                     num: '2019',
                     type: 'count'
                 }
             });
+            dispatch({
+                type: 'chart/fetchRankingListData',
+                payload: {
+                    limit: 7
+                }
+            })
         });
     }
 
@@ -56,14 +62,14 @@ class Analysis extends Component {
         const {dispatch} = this.props;
         this.setState({rangePickerValue});
 
-        dispatch({type: 'chart/fetchSalesData'});
+        dispatch({type: 'chart/fetchnodesData'});
     };
 
     selectDate = type => {
         const {dispatch} = this.props;
         this.setState({rangePickerValue: getTimeDistance(type)});
 
-        dispatch({type: 'chart/fetchSalesData'});
+        dispatch({type: 'chart/fetchnodesData'});
     };
 
     isActive = type => {
@@ -84,7 +90,8 @@ class Analysis extends Component {
         const {
             visitData,
             visitData2,
-            salesData,
+            nodesData,
+            rankingListData,
             searchData,
             offlineData,
             offlineChartData,
@@ -124,9 +131,10 @@ class Analysis extends Component {
                     <IntroduceRow loading={loading} visitData={visitData}/>
                 </Suspense>
                 <Suspense fallback={null}>
-                    <SalesCard
+                    <DatasCard
                         rangePickerValue={rangePickerValue}
-                        salesData={salesData}
+                        nodesData={nodesData}
+                        rankingListData={rankingListData}
                         isActive={this.isActive}
                         handleRangePickerChange={this.handleRangePickerChange}
                         loading={loading}

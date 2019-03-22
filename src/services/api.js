@@ -80,7 +80,16 @@ export async function getDataByTimescale(timescale, num) {
 
 // 按时间尺度分割返回数据，当type为count时，返回月份和count值，目前只做了年份就是十二个月的切分
 export async function countSegmentedByTimescale(timescale, num, type) {
-    return request(`${backend}/data/segmentByTimescale/?timescale=${timescale}&num=${num}&type=${type}`);
+    return request(`${backend}/data/segmentData/?timescale=${timescale}&num=${num}&type=${type}`);
+}
+
+// 按时间尺度返回安全率，type有safe unsafe  count之分
+export async function getSegmentSafe(timescale, num, type) {
+    return request(`${backend}/data/segmentSafe/?timescale=${timescale}&num=${num}&type=${type}`);
+}
+
+export async function countRankingListData(limit) {
+    return request(`${backend}/data/countRank/?limit=${limit}`);
 }
 
 // 返回count

@@ -1,4 +1,11 @@
-import {fakeChartData, getSearchData, getDataByTimescale, getCommodity, countSegmentedByTimescale} from '@/services/api';
+import {
+    fakeChartData,
+    getSearchData,
+    getDataByTimescale,
+    countRankingListData,
+    getCommodity,
+    countSegmentedByTimescale
+} from '@/services/api';
 
 export default {
     namespace : 'chart',
@@ -6,7 +13,8 @@ export default {
     state : {
         visitData: [],
         visitData2: [],
-        salesData: [],
+        nodesData: [],
+        rankingListData: [],
         searchData: [
             {
                 "id": 1,
@@ -74,14 +82,25 @@ export default {
                 }
             })
         },
-        *fetchSalesData({
+        *fetchRankingListData({
+            payload
+        }, {call, put}) {
+            const response = yield call(countRankingListData, payload.limit);
+            yield put({
+                type: 'save',
+                payload: {
+                    rankingListData: response
+                }
+            })
+        },
+        *fetchnodesData({
             payload
         }, {call, put}) {
             const response = yield call(countSegmentedByTimescale, payload.timescale, payload.num, payload.type);
             yield put({
                 type: 'save',
                 payload: {
-                    salesData: response
+                    nodesData: response
                 }
             })
         }
@@ -116,8 +135,9 @@ export default {
             return {
                 visitData: [],
                 visitData2: [],
-                salesData: [],
+                nodesData: [],
                 searchData: [],
+                rankingListData: [],
                 offlineData: [],
                 offlineChartData: [],
                 salesTypeData: [],

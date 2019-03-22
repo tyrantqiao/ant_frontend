@@ -11,19 +11,19 @@ const { TabPane } = Tabs;
 const rankingListData = [];
 for (let i = 0; i < 7; i += 1) {
   rankingListData.push({
-    title: formatMessage({ id: 'app.analysis.test' }, { no: i }),
+    title: i,
     total: 23333,
   });
 }
 
-const SalesCard = memo(
-  ({ rangePickerValue, salesData, isActive, handleRangePickerChange, loading, selectDate }) => (
+const DatasCard = memo(
+  ({ rangePickerValue, nodesData, isActive, handleRangePickerChange, loading, selectDate }) => (
     <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
-      <div className={styles.salesCard}>
+      <div className={styles.datasCard}>
         <Tabs
           tabBarExtraContent={
-            <div className={styles.salesExtraWrap}>
-              <div className={styles.salesExtra}>
+            <div className={styles.datasExtraWrap}>
+              <div className={styles.datasExtra}>
                 <a className={isActive('today')} onClick={() => selectDate('today')}>
                   <FormattedMessage id="app.analysis.all-day" defaultMessage="All Day" />
                 </a>
@@ -49,30 +49,30 @@ const SalesCard = memo(
           tabBarStyle={{ marginBottom: 24 }}
         >
           <TabPane
-            tab={<FormattedMessage id="app.analysis.sales" defaultMessage="Sales" />}
-            key="sales"
+            tab={<FormattedMessage id="app.analysis.datas" defaultMessage="Datas" />}
+            key="datas"
           >
             <Row>
               <Col xl={16} lg={12} md={12} sm={24} xs={24}>
-                <div className={styles.salesBar}>
+                <div className={styles.datasBar}>
                   <Bar
                     height={295}
                     title={
                       <FormattedMessage
-                        id="app.analysis.sales-trend"
-                        defaultMessage="Sales Trend"
+                        id="app.analysis.datas-trend"
+                        defaultMessage="Datas Trend"
                       />
                     }
-                    data={salesData}
+                    data={nodesData}
                   />
                 </div>
               </Col>
               <Col xl={8} lg={12} md={12} sm={24} xs={24}>
-                <div className={styles.salesRank}>
+                <div className={styles.datasRank}>
                   <h4 className={styles.rankingTitle}>
                     <FormattedMessage
-                      id="app.analysis.sales-ranking"
-                      defaultMessage="Sales Ranking"
+                      id="app.analysis.datas-ranking"
+                      defaultMessage="datas Ranking"
                     />
                   </h4>
                   <ul className={styles.rankingList}>
@@ -97,30 +97,30 @@ const SalesCard = memo(
             </Row>
           </TabPane>
           <TabPane
-            tab={<FormattedMessage id="app.analysis.visits" defaultMessage="Visits" />}
+            tab={<FormattedMessage id="app.analysis.safes" defaultMessage="safes" />}
             key="views"
           >
             <Row>
               <Col xl={16} lg={12} md={12} sm={24} xs={24}>
-                <div className={styles.salesBar}>
+                <div className={styles.datasBar}>
                   <Bar
                     height={292}
                     title={
                       <FormattedMessage
-                        id="app.analysis.visits-trend"
-                        defaultMessage="Visits Trend"
+                        id="app.analysis.safes-trend"
+                        defaultMessage="safes Trend"
                       />
                     }
-                    data={salesData}
+                    data={nodesData}
                   />
                 </div>
               </Col>
               <Col xl={8} lg={12} md={12} sm={24} xs={24}>
-                <div className={styles.salesRank}>
+                <div className={styles.datasRank}>
                   <h4 className={styles.rankingTitle}>
                     <FormattedMessage
-                      id="app.analysis.visits-ranking"
-                      defaultMessage="Visits Ranking"
+                      id="app.analysis.safes-ranking"
+                      defaultMessage="safes Ranking"
                     />
                   </h4>
                   <ul className={styles.rankingList}>
@@ -148,4 +148,4 @@ const SalesCard = memo(
   )
 );
 
-export default SalesCard;
+export default DatasCard;
