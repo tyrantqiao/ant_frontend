@@ -28,7 +28,7 @@ class Analysis extends Component {
             dispatch({type: 'chart/fetchSearchData'});
             dispatch({type: 'chart/fetchSalesTypeData'});
             dispatch({
-                type: 'chart/fetchnodesData',
+                type: 'chart/fetchNodesData',
                 payload: {
                     timescale: 'year',
                     num: '2019',
@@ -38,7 +38,23 @@ class Analysis extends Component {
             dispatch({
                 type: 'chart/fetchRankingListData',
                 payload: {
-                    limit: 7
+                    limit: 7,
+                    type: 'data'
+                }
+            });
+            dispatch({
+                type: 'chart/fetchRankingSafeRate',
+                payload: {
+                    limit: 7,
+                    type: 'safe'
+                }
+            });
+            dispatch({
+                type: 'chart/fetchSafeRateData',
+                payload: {
+                    timescale: 'year',
+                    num: 2019,
+                    type: 'count'
                 }
             })
         });
@@ -62,14 +78,14 @@ class Analysis extends Component {
         const {dispatch} = this.props;
         this.setState({rangePickerValue});
 
-        dispatch({type: 'chart/fetchnodesData'});
+        dispatch({type: 'chart/fetchNodesData'});
     };
 
     selectDate = type => {
         const {dispatch} = this.props;
         this.setState({rangePickerValue: getTimeDistance(type)});
 
-        dispatch({type: 'chart/fetchnodesData'});
+        dispatch({type: 'chart/fetchNodesData'});
     };
 
     isActive = type => {
@@ -92,10 +108,12 @@ class Analysis extends Component {
             visitData2,
             nodesData,
             rankingListData,
+            rankingSafeRateData,
             searchData,
             offlineData,
             offlineChartData,
             salesTypeData,
+            safeRateData,
             salesTypeDataOnline,
             salesTypeDataOffline
         } = chart;
@@ -135,6 +153,8 @@ class Analysis extends Component {
                         rangePickerValue={rangePickerValue}
                         nodesData={nodesData}
                         rankingListData={rankingListData}
+                        safeRateData={safeRateData}
+                        rankingSafeRateData={rankingSafeRateData}
                         isActive={this.isActive}
                         handleRangePickerChange={this.handleRangePickerChange}
                         loading={loading}

@@ -4,6 +4,7 @@ import {
     getDataByTimescale,
     countRankingListData,
     getCommodity,
+    getSegmentSafe,
     countSegmentedByTimescale
 } from '@/services/api';
 
@@ -15,6 +16,8 @@ export default {
         visitData2: [],
         nodesData: [],
         rankingListData: [],
+        rankingSafeRateData: [],
+        safeRateData: [],
         searchData: [
             {
                 "id": 1,
@@ -85,7 +88,7 @@ export default {
         *fetchRankingListData({
             payload
         }, {call, put}) {
-            const response = yield call(countRankingListData, payload.limit);
+            const response = yield call(countRankingListData, payload.limit, payload.type);
             yield put({
                 type: 'save',
                 payload: {
@@ -93,7 +96,29 @@ export default {
                 }
             })
         },
-        *fetchnodesData({
+        *fetchRankingSafeRate({
+            payload
+        }, {call, put}) {
+            const response = yield call(countRankingListData, payload.limit, payload.type);
+            yield put({
+                type: 'save',
+                payload: {
+                    rankingSafeRateData: response
+                }
+            })
+        },
+        *fetchSafeRateData({
+            payload
+        }, {call, put}) {
+            const response = yield call(getSegmentSafe, payload.timescale, payload.num, payload.type);
+            yield put({
+                type: 'save',
+                payload: {
+                    safeRateData: response
+                }
+            })
+        },
+        *fetchNodesData({
             payload
         }, {call, put}) {
             const response = yield call(countSegmentedByTimescale, payload.timescale, payload.num, payload.type);
@@ -143,6 +168,8 @@ export default {
                 salesTypeData: [],
                 salesTypeDataOnline: [],
                 salesTypeDataOffline: [],
+                rankingSafeRateData: [],
+                safeRateData: [],
                 radarData: []
             };
         }

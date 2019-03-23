@@ -88,8 +88,9 @@ export async function getSegmentSafe(timescale, num, type) {
     return request(`${backend}/data/segmentSafe/?timescale=${timescale}&num=${num}&type=${type}`);
 }
 
-export async function countRankingListData(limit) {
-    return request(`${backend}/data/countRank/?limit=${limit}`);
+// 返回数据节点排名，可限制出现数量
+export async function countRankingListData(limit,type) {
+    return request(`${backend}/data/countRank/?limit=${limit}&type=${type}`);
 }
 
 // 返回count
