@@ -1,28 +1,29 @@
-import { queryTags } from '@/services/api';
+import {queryTags, getSearchData} from '@/services/api';
 
 export default {
-  namespace: 'monitor',
+    namespace : 'monitor',
 
-  state: {
-    tags: [],
-  },
-
-  effects: {
-    *fetchTags(_, { call, put }) {
-      const response = yield call(queryTags);
-      yield put({
-        type: 'saveTags',
-        payload: response.list,
-      });
+    state : {
+        tags: []
     },
-  },
 
-  reducers: {
-    saveTags(state, action) {
-      return {
-        ...state,
-        tags: action.payload,
-      };
+    effects : {
+        *fetchSearchData(_, {call, put}) {
+            const response = yield call(getSearchData);
+            const result = [];
+            Object
+                .keys(response)
+                .map(key => result.push({'name': response[key].keyword, 'value': response[key].count}));
+            yield put({type: 'saveTags', payload: result})
+        }
     },
-  },
+
+    reducers : {
+        saveTags(state, action) {
+            return {
+                ...state,
+                tags: action.payload
+            };
+        }
+    }
 };

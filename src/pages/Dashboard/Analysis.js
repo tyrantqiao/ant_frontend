@@ -18,6 +18,7 @@ class Analysis extends Component {
     state = {
         Type: 'all',
         currentTabKey: '',
+        // 默认时间选择区域为一年
         rangePickerValue: getTimeDistance('year')
     };
 
@@ -60,6 +61,41 @@ class Analysis extends Component {
         });
     }
 
+    // 按时间区间获得数据
+    getRangePickerData(){
+        const {dispatch}=this.props;
+        dispatch({
+            type: 'chart/fetchNodesData',
+            payload: {
+                timescale: 'year',
+                num: '2019',
+                type: 'count'
+            }
+        });
+        dispatch({
+            type: 'chart/fetchRankingListData',
+            payload: {
+                limit: 7,
+                type: 'data'
+            }
+        });
+        dispatch({
+            type: 'chart/fetchRankingSafeRate',
+            payload: {
+                limit: 7,
+                type: 'safe'
+            }
+        });
+        dispatch({
+            type: 'chart/fetchSafeRateData',
+            payload: {
+                timescale: 'year',
+                num: 2019,
+                type: 'count'
+            }
+        })
+    }
+
     componentWillUnmount() {
         const {dispatch} = this.props;
         dispatch({type: 'chart/clear'});
@@ -81,6 +117,7 @@ class Analysis extends Component {
         dispatch({type: 'chart/fetchNodesData'});
     };
 
+    // 时间选择框【前端】
     selectDate = type => {
         const {dispatch} = this.props;
         this.setState({rangePickerValue: getTimeDistance(type)});
@@ -145,9 +182,9 @@ class Analysis extends Component {
 
         return (
             <GridContent>
-                <Suspense fallback={< PageLoading />}>
+                {/* <Suspense fallback={< PageLoading />}>
                     <IntroduceRow loading={loading} visitData={visitData}/>
-                </Suspense>
+                </Suspense> */}
                 <Suspense fallback={null}>
                     <DatasCard
                         rangePickerValue={rangePickerValue}
