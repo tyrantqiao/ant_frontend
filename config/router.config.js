@@ -43,10 +43,6 @@ export default[
                         path: '/dashboard/monitor',
                         name: 'monitor',
                         component: './Dashboard/Monitor'
-                    }, {
-                        path: '/dashboard/workplace',
-                        name: 'workplace',
-                        component: './Dashboard/Workplace'
                     }
                 ]
             },
@@ -59,9 +55,8 @@ export default[
                     {
                         path: '/values/list-form',
                         name: 'valuesListform',
-                        component: './Values/list/ListForm'
-                    },
-                    {
+                        component: './Values/list/listForm'
+                    }, {
                         path: '/values/step-form',
                         name: 'valStepform',
                         component: './Values/StepForm',
@@ -98,7 +93,7 @@ export default[
                     {
                         path: '/node/list-form',
                         name: 'nodeListform',
-                        component: './Nodes/list/ListForm'
+                        component: './Nodes/list/listForm'
                     }, {
                         path: '/node/step-form',
                         name: 'nodeStepform',
