@@ -83,13 +83,18 @@ export async function countSegmentedByTimescale(timescale, num, type) {
     return request(`${backend}/data/segmentData/?timescale=${timescale}&num=${num}&type=${type}`);
 }
 
-// 按时间尺度返回安全率，type有safe unsafe  count之分
+// 按时间尺度返回安全率，type有safe  unsafe  count之分
 export async function getSegmentSafe(timescale, num, type) {
     return request(`${backend}/data/segmentSafe/?timescale=${timescale}&num=${num}&type=${type}`);
 }
 
+// 获取实时的安全率，默认为一小时内
+export async function getRealTimeSafeRate(timescale) {
+    return request(`${backend}/data/realTimeSafe/?timescale=${timescale}`);
+}
+
 // 返回数据节点排名，可限制出现数量
-export async function countRankingListData(limit,type) {
+export async function countRankingListData(limit, type) {
     return request(`${backend}/data/countRank/?limit=${limit}&type=${type}`);
 }
 

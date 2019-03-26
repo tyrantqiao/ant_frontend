@@ -28,11 +28,17 @@ class Monitor extends Component {
     componentDidMount() {
         const {dispatch} = this.props;
         dispatch({type: 'monitor/fetchSearchData'});
+        dispatch({
+            type: 'monitor/fetchSafeRate',
+            payload: {
+                'timescale': 'hour'
+            }
+        })
     }
 
     render() {
         const {monitor, loading} = this.props;
-        const {tags} = monitor;
+        const {tags, safeRate} = monitor;
 
         return (
             <GridContent>
@@ -91,7 +97,7 @@ class Monitor extends Component {
                             <Gauge
                                 title={formatMessage({id: 'app.monitor.ratio', defaultMessage: 'Ratio'})}
                                 height={180}
-                                percent={87}/>
+                                percent={safeRate}/>
                         </Card>
                     </Col>
                     <Col

@@ -221,14 +221,14 @@ class Analysis extends Component {
                         </Col>
                     </Row>
                 </div>
-                <Suspense fallback={null}>
+                {/* <Suspense fallback={null}>
                     <OfflineData
                         activeKey={activeKey}
                         loading={loading}
                         offlineData={offlineData}
                         offlineChartData={offlineChartData}
                         handleTabChange={this.handleTabChange}/>
-                </Suspense>
+                </Suspense> */}
             </GridContent>
         );
     }
