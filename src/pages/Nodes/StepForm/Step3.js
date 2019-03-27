@@ -48,6 +48,30 @@ class Step3 extends React.PureComponent {
             <span className={styles.number}>{data.maxVal}</span>
           </Col>
         </Row>
+        <Row>
+          <Col xs={24} sm={8} className={styles.label}>
+            行政区编号：
+          </Col>
+          <Col xs={24} sm={16}>
+            <span className={styles.number}>{data.adcode}</span>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={24} sm={8} className={styles.label}>
+            当前经度：
+          </Col>
+          <Col xs={24} sm={16}>
+            <span className={styles.number}>{data.longitude}</span>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={24} sm={8} className={styles.label}>
+            当前纬度：
+          </Col>
+          <Col xs={24} sm={16}>
+            <span className={styles.number}>{data.latitude}</span>
+          </Col>
+        </Row>
       </div>
     );
     const actions = (

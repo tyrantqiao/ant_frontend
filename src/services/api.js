@@ -128,6 +128,11 @@ export async function getCommodity() {
     return request(`${backend}/commodity/`);
 }
 
+// getLaAndLong
+export async function getLaAndLong(adcode){
+    return request(`/amap/v3/config/district?keywords=${adcode}&subdistrict=0&key=e37d57996f6ccac42feb6857125be64f`);
+}
+
 export async function fakeSubmitForm(params) {
     return request('/api/forms', {
         method: 'POST',

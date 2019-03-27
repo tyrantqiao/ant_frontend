@@ -1,7 +1,7 @@
 import {routerRedux} from 'dva/router';
 import {message, Tag, Divider} from 'antd';
 // 需要引入api的函数 error
-import {submitNodeForm, getNodes, deleteNode, updateNode} from '@/services/api';
+import {submitNodeForm, getNodes, deleteNode, updateNode, getLaAndLong} from '@/services/api';
 
 export default {
     // model的定义名字
@@ -14,7 +14,10 @@ export default {
             node_name: 'temperature_node_1',
             node_type: 'temperature',
             maxVal: '10',
-            minVal: '1'
+            minVal: '1',
+            adcode: "440100",
+            "longitude": 113.27,
+            "latitude": 23.13
         },
         nodes: [
             {
@@ -22,7 +25,10 @@ export default {
                 node_name: 'temperature_1',
                 node_type: 'temperature',
                 minVal: 22,
-                maxVal: 25
+                maxVal: 25,
+                adcode: "440100",
+                "longitude": 113.27,
+                "latitude": 23.13
             }
         ]
     },
@@ -48,6 +54,13 @@ export default {
         }, {call, put}) {
             yield call(updateNode, payload, payload.id);
         },
+        // 获取经纬度
+        *getLaAndLong({
+            payload
+        }, {call, put}) {
+            const response = yield call(getLaAndLong, payload);
+            yield put({type: 'saveLaAndLong', payload: response});
+        },
         // 获取nodes
         *getNodesList(_, {call, put}) {
             const latestNodesList = yield call(getNodes, _);
@@ -62,6 +75,22 @@ export default {
                 step: {
                     ...state.step,
                     ...payload
+                }
+            };
+        },
+        saveLaAndLong(state, {payload}) {
+            return {
+                ...state,
+                step: {
+                    ...state.step,
+                    longitude: payload
+                        .districts[0]
+                        .center
+                        .split(',')[0],
+                    latitude: payload
+                        .districts[0]
+                        .center
+                        .split(',')[1]
                 }
             };
         },

@@ -11,23 +11,34 @@ import numeral from 'numeral';
 import GridContent from '@/components/PageHeaderWrapper/GridContent';
 import Authorized from '@/utils/Authorized';
 import styles from './Monitor.less';
+import {Map, Markers} from 'react-amap';
 
 const {Secured} = Authorized;
 
 const targetTime = new Date().getTime() + 3900000;
 
-// use permission as a parameter
 const havePermissionAsync = new Promise(resolve => {
-    // Call resolve on behalf of passed
     setTimeout(() => resolve(), 300);
 });
 
-@Secured(havePermissionAsync)
-@connect(({monitor, loading}) => ({monitor, loading: loading.models.monitor}))
-class Monitor extends Component {
+@Secured(havePermissionAsync)@connect(({monitor, loading}) => ({monitor, loading: loading.models.monitor}))class
+Monitor extends Component {
+    constructor() {
+        super();
+    }
+
+    toggleCtrlBar() {
+        if (this.state.plugins.indexOf('ControlBar') === -1) {
+            this.setState({plugins: ['ControlBar']});
+        } else {
+            this.setState({plugins: []});
+        }
+    }
+
     componentDidMount() {
         const {dispatch} = this.props;
         dispatch({type: 'monitor/fetchSearchData'});
+        dispatch({type: 'monitor/fetchMarkers'});
         dispatch({
             type: 'monitor/fetchSafeRate',
             payload: {
@@ -38,8 +49,7 @@ class Monitor extends Component {
 
     render() {
         const {monitor, loading} = this.props;
-        const {tags, safeRate} = monitor;
-
+        const {tags, safeRate, markers} = monitor;
         return (
             <GridContent>
                 <Row gutter={24}>
@@ -64,11 +74,6 @@ class Monitor extends Component {
                                 </Col>
                                 <Col md={6} sm={12} xs={24}>
                                     <NumberInfo
-                                        subTitle={< FormattedMessage id = "app.monitor.safe-rate" defaultMessage = "safe rate" />}
-                                        total="92%"/>
-                                </Col>
-                                <Col md={6} sm={12} xs={24}>
-                                    <NumberInfo
                                         subTitle={< FormattedMessage id = "app.monitor.total-collections-per-hour" defaultMessage = "Total collections per hour" />}
                                         suffix="条"
                                         total={numeral(234).format('0,0')}/>
@@ -77,9 +82,15 @@ class Monitor extends Component {
                             <div className={styles.mapChart}>
                                 <Tooltip
                                     title={< FormattedMessage id = "app.monitor.waiting-for-implementation" defaultMessage = "Waiting for implementation" />}>
-                                    <img
-                                        src="https://gw.alipayobjects.com/zos/antfincdn/h%24wFbzuuzz/HBWnDEUXCnGnGrRfrpKa.png"
-                                        alt="map"/>
+                                    <div
+                                        style={{
+                                        width: '100%',
+                                        height: '370px'
+                                    }}>
+                                        <Map plugins={['ToolBar']} zoom={5}>
+                                            <Markers markers={markers} useCluster={true}/>
+                                        </Map>
+                                    </div>
                                 </Tooltip>
                             </div>
                         </Card>
@@ -124,7 +135,8 @@ class Monitor extends Component {
     }
 }
 
-export default props => (
+export
+default props => (
     <AsyncLoadBizCharts>
         <Monitor {...props}/>
     </AsyncLoadBizCharts>

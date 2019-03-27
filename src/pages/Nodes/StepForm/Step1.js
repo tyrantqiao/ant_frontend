@@ -1,8 +1,10 @@
 import React, {Fragment} from 'react';
 import {connect} from 'dva';
 import {Form, Input, Button, Select, Divider} from 'antd';
+import {formatMessage, FormattedMessage} from 'umi/locale';
 import router from 'umi/router';
 import styles from './style.less';
+import GeographicView from './GeographicView';
 
 const {Option} = Select;
 
@@ -13,6 +15,17 @@ const formItemLayout = {
     wrapperCol: {
         span: 19
     }
+};
+
+const validatorGeographic = (rule, value, callback) => {
+    const {province, city} = value;
+    if (!province.key) {
+        callback('Please input your province!');
+    }
+    if (!city.key) {
+        callback('Please input your city!');
+    }
+    callback();
 };
 
 // connect属于dva的语法糖，用于将数据绑定起来 这里就应该是负责连接models文件，以文件名形式绑定
@@ -27,6 +40,11 @@ class Step1 extends React.PureComponent {
         const onValidateForm = () => {
             validateFields((err, values) => {
                 if (!err) {
+                    dispatch({type: 'node/getLaAndLong', payload: values.adcode.city.key});
+                    values = {
+                        ...values,
+                        adcode: values.adcode.city.key
+                    }
                     dispatch({
                         // 看表单形式为添加还是删除，加入一个选择框
                         type: 'node/saveStepFormData',
@@ -101,6 +119,22 @@ class Step1 extends React.PureComponent {
                                 }
                             ]
                         })(<Input prefix="$" placeholder="请输入最大工作值"/>)}
+                    </Form.Item>
+                    <Form.Item
+                        {...formItemLayout}
+                        label={formatMessage({id: 'app.settings.basic.geographic'})}>
+                        {getFieldDecorator('adcode', {
+                            rules: [
+                                {
+                                    required: true,
+                                    message: formatMessage({
+                                        id: 'app.settings.basic.geographic-message'
+                                    }, {})
+                                }, {
+                                    validator: validatorGeographic
+                                }
+                            ]
+                        })(<GeographicView/>)}
                     </Form.Item>
                     <Form.Item
                         wrapperCol={{
