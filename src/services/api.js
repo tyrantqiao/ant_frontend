@@ -100,7 +100,7 @@ export async function countRankingListData(limit, type) {
 
 // 返回count
 export async function countByTimescale(timescale, num) {
-    return request(`${backend}/api/data/countByTimescale/?timescale=${timescale}&num=${num}`);
+    return request(`${backend}/data/countByTimescale/?timescale=${timescale}&num=${num}`);
 }
 
 // 添加订单

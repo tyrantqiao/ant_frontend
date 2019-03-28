@@ -40,6 +40,18 @@ Monitor extends Component {
         dispatch({type: 'monitor/fetchSearchData'});
         dispatch({type: 'monitor/fetchMarkers'});
         dispatch({
+            type: 'monitor/fetchTodayCount',
+            payload: {
+                'timescale': 'today'
+            }
+        });
+        dispatch({
+            type: 'monitor/fetchHourCount',
+            payload: {
+                'timescale': 'hour'
+            }
+        });
+        dispatch({
             type: 'monitor/fetchSafeRate',
             payload: {
                 'timescale': 'hour'
@@ -49,7 +61,7 @@ Monitor extends Component {
 
     render() {
         const {monitor, loading} = this.props;
-        const {tags, safeRate, markers} = monitor;
+        const {tags, safeRate, markers, daysNum, hoursNum} = monitor;
         return (
             <GridContent>
                 <Row gutter={24}>
@@ -70,13 +82,13 @@ Monitor extends Component {
                                     <NumberInfo
                                         subTitle={< FormattedMessage id = "app.monitor.total-collections" defaultMessage = "Total Collentions today" />}
                                         suffix="条"
-                                        total={numeral(124543233).format('0,0')}/>
+                                        total={daysNum}/>
                                 </Col>
                                 <Col md={6} sm={12} xs={24}>
                                     <NumberInfo
                                         subTitle={< FormattedMessage id = "app.monitor.total-collections-per-hour" defaultMessage = "Total collections per hour" />}
                                         suffix="条"
-                                        total={numeral(234).format('0,0')}/>
+                                        total={hoursNum}/>
                                 </Col>
                             </Row>
                             <div className={styles.mapChart}>

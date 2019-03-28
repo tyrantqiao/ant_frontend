@@ -96,10 +96,10 @@ class ListForm extends React.PureComponent {
             {
                 title: '节点名字',
                 dataIndex: 'node_name',
-                width: '20%',
+                width: '15%',
                 editable: true
             }, {
-                title: '节点id',
+                title: 'id',
                 dataIndex: 'id',
                 sorter: true,
                 sorter: (a, b) => a.id - b.id,
@@ -118,17 +118,23 @@ class ListForm extends React.PureComponent {
                         </Tag>
                     </span>
                 ),
-                width: '20%',
+                width: '15%',
                 editable: true
             }, {
                 title: '最小值',
                 dataIndex: 'minVal',
-                width: '10%',
+                width: '15%',
                 sorter: (a, b) => a.minVal - b.minVal,
                 editable: true
             }, {
                 title: '最大值',
                 dataIndex: 'maxVal',
+                width: '15%',
+                sorter: (a, b) => a.maxVal - b.maxVal,
+                editable: true
+            }, {
+                title: '行政区编码',
+                dataIndex: 'adcode',
                 width: '10%',
                 sorter: (a, b) => a.maxVal - b.maxVal,
                 editable: true
@@ -280,14 +286,8 @@ class ListForm extends React.PureComponent {
             <Fragment>
                 <Form layout="horizontal" hideRequiredMark>
                     {/* 展示数据 */}
-                    <Table
-                        components={components}
-                        // bordered
-                        dataSource={this.props.nodes}
-                        rowKey={record => record.id}
-                        columns={columns}
-                        rowClassName="editable-row"
-                        pagination={{
+                    <Table components={components} // bordered
+                        dataSource={this.props.nodes} rowKey={record => record.id} columns={columns} rowClassName="editable-row" pagination={{
                         onChange: this.cancel
                     }}/>
                 </Form>
