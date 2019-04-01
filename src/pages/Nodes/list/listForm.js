@@ -7,13 +7,15 @@ import {
     Table,
     Divider,
     Tag,
+    Icon,
+    Button,
     Popconfirm
 } from 'antd';
 // 根据router.config.jd生成的路由表存在于pages/.umi下
 import router from 'umi/router';
 import styles from './TableList.less';
 import {delay} from 'q';
-// 可编辑table
+import Highlighter from 'react-highlight-words';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -97,7 +99,8 @@ class ListForm extends React.PureComponent {
                 title: '节点名字',
                 dataIndex: 'node_name',
                 width: '15%',
-                editable: true
+                editable: true,
+                ...this.getColumnSearchProps('node_name')
             }, {
                 title: 'id',
                 dataIndex: 'id',
@@ -119,7 +122,8 @@ class ListForm extends React.PureComponent {
                     </span>
                 ),
                 width: '15%',
-                editable: true
+                editable: true,
+                ...this.getColumnSearchProps('node_type')
             }, {
                 title: '最小值',
                 dataIndex: 'minVal',
@@ -137,7 +141,8 @@ class ListForm extends React.PureComponent {
                 dataIndex: 'adcode',
                 width: '10%',
                 sorter: (a, b) => a.maxVal - b.maxVal,
-                editable: true
+                editable: true,
+                ...this.getColumnSearchProps('adcode')
             }, {
                 title: 'Action',
                 dataIndex: 'action',
@@ -150,11 +155,7 @@ class ListForm extends React.PureComponent {
                                     Delete
                                 </a>
                             </Popconfirm>
-                            <Divider type="vertical"/> {/* 确认框 */}
-                            {/* <a href="javascript:;" onClick={() => this.updateNode(record)}>
-                            Update
-                        </a> */}
-                            {editable
+                            <Divider type="vertical"/> {editable
                                 ? (
                                     <span>
                                         <EditableContext.Consumer>
@@ -183,6 +184,83 @@ class ListForm extends React.PureComponent {
                 }
             }
         ];
+    }
+
+    getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
+            <div style={{
+                padding: 8
+            }}>
+                <Input
+                    ref={node => {
+                    this.searchInput = node;
+                }}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={e => setSelectedKeys(e.target.value
+                    ? [e.target.value]
+                    : [])}
+                    onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+                    style={{
+                    width: 188,
+                    marginBottom: 8,
+                    display: 'block'
+                }}/>
+                <Button
+                    type="primary"
+                    onClick={() => this.handleSearch(selectedKeys, confirm)}
+                    icon="search"
+                    size="small"
+                    style={{
+                    width: 90,
+                    marginRight: 8
+                }}>
+                    Search
+                </Button>
+                <Button
+                    onClick={() => this.handleReset(clearFilters)}
+                    size="small"
+                    style={{
+                    width: 90
+                }}>
+                    Reset
+                </Button>
+            </div>
+        ),
+        filterIcon: filtered => <Icon
+            type="search"
+            style={{
+            color: filtered
+                ? '#1890ff'
+                : undefined
+        }}/>,
+        onFilter: (value, record) => record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible) => {
+            if (visible) {
+                setTimeout(() => this.searchInput.select());
+            }
+        },
+        render: (text) => (<Highlighter
+            highlightStyle={{
+            backgroundColor: '#ffc069',
+            padding: 0
+        }}
+            searchWords={[this.state.searchText]}
+            autoEscape
+            textToHighlight={text.toString()}/>)
+    })
+
+    handleSearch = (selectedKeys, confirm) => {
+        confirm();
+        this.setState({searchText: selectedKeys[0]});
+    }
+
+    handleReset = (clearFilters) => {
+        clearFilters();
+        this.setState({searchText: ''});
     }
 
     // 表格可编辑行，是通过存入当前编辑的id，然后再将表格对应行id进行比较，目前是以id作为key来设置的，暂时用toString()先

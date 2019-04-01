@@ -9,7 +9,9 @@ import {
     DatePicker,
     TimePicker,
     Tag,
-    Popconfirm
+    Popconfirm,
+    Icon,
+    Button
 } from 'antd';
 // 根据router.config.jd生成的路由表存在于pages/.umi下
 import {formatMessage, FormattedMessage} from 'umi/locale';
@@ -17,7 +19,7 @@ import moment from 'moment';
 import router from 'umi/router';
 import styles from './TableList.less';
 import {delay} from 'q';
-// 可编辑table
+import Highlighter from 'react-highlight-words';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -93,8 +95,10 @@ class ListForm extends React.PureComponent {
 
         this.state = {
             data: this.props.datas,
-            editingKey: ''
+            editingKey: '',
+            searchText: ''
         };
+
         // columns只是用来渲染表格初始状态的，所以只要在page页定义即可，数据源在定义在models中
         this.columns = [
             {
@@ -107,13 +111,14 @@ class ListForm extends React.PureComponent {
                 dataIndex: 'nodeId',
                 sorter: (a, b) => a.nodeId - b.nodeId,
                 editable: true,
-                width: '10%'
+                ...this.getColumnSearchProps('nodeId')
             }, {
                 title: '数据值',
                 dataIndex: 'val',
                 sorter: (a, b) => a.val - b.val,
                 width: '10%',
-                editable: true
+                editable: true,
+                ...this.getColumnSearchProps('val')
             }, {
                 title: '单位',
                 dataIndex: 'unit',
@@ -129,7 +134,8 @@ class ListForm extends React.PureComponent {
                         </Tag>
                     </span>
                 ),
-                editable: true
+                editable: true,
+                ...this.getColumnSearchProps('unit')
             }, {
                 title: '安全',
                 dataIndex: 'safe',
@@ -147,7 +153,8 @@ class ListForm extends React.PureComponent {
                         </Tag>
                     </span>
                 ),
-                editable: true
+                editable: true,
+                ...this.getColumnSearchProps('safe')
             }, {
                 title: '记录时间',
                 dataIndex: 'recordTime',
@@ -195,6 +202,83 @@ class ListForm extends React.PureComponent {
                 }
             }
         ];
+    }
+
+    getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
+            <div style={{
+                padding: 8
+            }}>
+                <Input
+                    ref={node => {
+                    this.searchInput = node;
+                }}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={e => setSelectedKeys(e.target.value
+                    ? [e.target.value]
+                    : [])}
+                    onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+                    style={{
+                    width: 188,
+                    marginBottom: 8,
+                    display: 'block'
+                }}/>
+                <Button
+                    type="primary"
+                    onClick={() => this.handleSearch(selectedKeys, confirm)}
+                    icon="search"
+                    size="small"
+                    style={{
+                    width: 90,
+                    marginRight: 8
+                }}>
+                    Search
+                </Button>
+                <Button
+                    onClick={() => this.handleReset(clearFilters)}
+                    size="small"
+                    style={{
+                    width: 90
+                }}>
+                    Reset
+                </Button>
+            </div>
+        ),
+        filterIcon: filtered => <Icon
+            type="search"
+            style={{
+            color: filtered
+                ? '#1890ff'
+                : undefined
+        }}/>,
+        onFilter: (value, record) => record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase()),
+        onFilterDropdownVisibleChange: (visible) => {
+            if (visible) {
+                setTimeout(() => this.searchInput.select());
+            }
+        },
+        render: (text) => (<Highlighter
+            highlightStyle={{
+            backgroundColor: '#ffc069',
+            padding: 0
+        }}
+            searchWords={[this.state.searchText]}
+            autoEscape
+            textToHighlight={text.toString()}/>)
+    })
+
+    handleSearch = (selectedKeys, confirm) => {
+        confirm();
+        this.setState({searchText: selectedKeys[0]});
+    }
+
+    handleReset = (clearFilters) => {
+        clearFilters();
+        this.setState({searchText: ''});
     }
 
     // 表格可编辑行，是通过存入当前编辑的id，然后再将表格对应行id进行比较，目前是以id作为key来设置的，暂时用toString()先
