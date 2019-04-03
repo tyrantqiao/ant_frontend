@@ -167,11 +167,6 @@ class Step1 extends React.PureComponent {
                         手动导入时应注意选择对应的传感器id，然后导入数据需要选择好时间单位等等。
                     </p>
                 </div>
-
-                {/* <Select defaultValue="alipay" style={{ width: 100 }}>
-          <Option value="alipay">支付宝</Option>
-          <Option value="bank">银行账户</Option>
-        </Select> */}
             </Fragment>
         );
     }

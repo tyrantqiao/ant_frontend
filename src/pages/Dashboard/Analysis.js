@@ -54,21 +54,21 @@ class Analysis extends Component {
                 type: 'chart/fetchSafeRateData',
                 payload: {
                     timescale: 'year',
-                    num: 2019,
-                    type: 'count'
+                    type: 'count',
+                    num: 'all'
                 }
             })
         });
     }
 
     // 按时间区间获得数据
-    getRangePickerData(){
-        const {dispatch}=this.props;
+    getRangePickerData() {
+        const {dispatch} = this.props;
         dispatch({
             type: 'chart/fetchNodesData',
             payload: {
                 timescale: 'year',
-                num: '2019',
+                num: 2019,
                 type: 'count'
             }
         });
@@ -90,8 +90,8 @@ class Analysis extends Component {
             type: 'chart/fetchSafeRateData',
             payload: {
                 timescale: 'year',
-                num: 2019,
-                type: 'count'
+                type: 'count',
+                num: 'all'
             }
         })
     }
@@ -182,9 +182,9 @@ class Analysis extends Component {
 
         return (
             <GridContent>
-                {/* <Suspense fallback={< PageLoading />}>
+                <Suspense fallback={< PageLoading />}>
                     <IntroduceRow loading={loading} visitData={visitData}/>
-                </Suspense> */}
+                </Suspense>
                 <Suspense fallback={null}>
                     <DatasCard
                         rangePickerValue={rangePickerValue}
@@ -221,14 +221,14 @@ class Analysis extends Component {
                         </Col>
                     </Row>
                 </div>
-                {/* <Suspense fallback={null}>
+                <Suspense fallback={null}>
                     <OfflineData
                         activeKey={activeKey}
                         loading={loading}
                         offlineData={offlineData}
                         offlineChartData={offlineChartData}
                         handleTabChange={this.handleTabChange}/>
-                </Suspense> */}
+                </Suspense>
             </GridContent>
         );
     }

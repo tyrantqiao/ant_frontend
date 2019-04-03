@@ -16,7 +16,7 @@ const topColResponsiveProps = {
   style: { marginBottom: 24 },
 };
 
-const IntroduceRow = memo(({ loading, visitData }) => (
+const IntroduceRow = memo(({ loading, segementData, segementSafe, dailyCollect, totalCollect, totalSafe, dailySafe }) => (
   <Row gutter={24}>
     <Col {...topColResponsiveProps}>
       <ChartCard
@@ -30,15 +30,16 @@ const IntroduceRow = memo(({ loading, visitData }) => (
           </Tooltip>
         }
         loading={loading}
-        total={() => <Yuan>126560</Yuan>}
+        total={() => <Yuan>{totalCollect}</Yuan>}
         footer={
           <Field
             label={<FormattedMessage id="app.analysis.day-datas" defaultMessage="Daily Datas" />}
-            value={`￥${numeral(12423).format('0,0')}`}
+            value={dailyCollect}
           />
         }
         contentHeight={46}
       >
+        <MiniArea color="#975FE4" data={segementData} />
       </ChartCard>
     </Col>
 
@@ -46,7 +47,7 @@ const IntroduceRow = memo(({ loading, visitData }) => (
       <ChartCard
         bordered={false}
         loading={loading}
-        title={<FormattedMessage id="app.analysis.datas" defaultMessage="Datas" />}
+        title={<FormattedMessage id="app.analysis.totalsafes" defaultMessage="Total Safes" />}
         action={
           <Tooltip
             title={<FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />}
@@ -54,16 +55,16 @@ const IntroduceRow = memo(({ loading, visitData }) => (
             <Icon type="info-circle-o" />
           </Tooltip>
         }
-        total={numeral(8846).format('0,0')}
+        total={totalSafe}
         footer={
           <Field
             label={<FormattedMessage id="app.analysis.day-safeRate" defaultMessage="Daily SafeRate" />}
-            value={numeral(1234).format('0,0')}
+            value={dailySafe}
           />
         }
         contentHeight={46}
       >
-        <MiniArea color="#975FE4" data={visitData} />
+        <MiniArea color="#975FE4" data={segementSafe} />
       </ChartCard>
     </Col>
   </Row>

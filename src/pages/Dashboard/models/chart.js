@@ -110,7 +110,7 @@ export default {
         *fetchSafeRateData({
             payload
         }, {call, put}) {
-            const response = yield call(getSegmentSafe, payload.timescale, payload.num, payload.type);
+            const response = yield call(getSegmentSafe, payload.timescale, payload.type, payload.num);
             yield put({
                 type: 'save',
                 payload: {
@@ -121,7 +121,7 @@ export default {
         *fetchNodesData({
             payload
         }, {call, put}) {
-            const response = yield call(countSegmentedByTimescale, payload.timescale, payload.num, payload.type);
+            const response = yield call(countSegmentedByTimescale, payload.timescale, payload.num, payload.type, 'all');
             yield put({
                 type: 'save',
                 payload: {

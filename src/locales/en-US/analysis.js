@@ -1,16 +1,22 @@
 export default {
     'app.analysis.test' : 'Gongzhuan No.{no} shop',
     'app.analysis.introduce' : 'Introduce',
-    'app.analysis.total-sales' : 'Total Sales',
-    'app.analysis.day-sales' : 'Daily Sales',
+    // 总收集量
+    'app.analysis.total-datas' : 'Total Datas',
+    'app.analysis.day-datas' : 'Daily Datas',
     'app.analysis.safes' : 'Safe',
+    'app.analysis.datas' : 'Daily Datas',
+    'app.analysis.sales' : 'Sales',
+    'app.analysis.totalsafes': 'Total Safes',
+    'app.analysis.day-safeRate': 'Daily SafeRate',
     'app.analysis.safes-trend' : 'Collect Safe Trend',
     'app.analysis.safes-ranking' : 'Collect Safe Ranking',
     'app.analysis.day-safes' : 'Daily safes',
     'app.analysis.week' : 'WoW Change',
     'app.analysis.day' : 'DoD Change',
-    'app.analysis.payments' : 'Payments',
-    'app.analysis.conversion-rate' : 'Conversion Rate',
+    'app.analysis.unsafe' : 'Unsafe',
+    // 安全率
+    'app.analysis.conversion-rate' : 'Collects',
     'app.analysis.operational-effect' : 'Operational Effect',
     // datas card
     'app.analysis.datas-trend' : 'Collect Data Trend',
@@ -29,7 +35,7 @@ export default {
     'app.analysis.channel.stores' : 'Stores',
     'app.analysis.datas' : 'datas',
     //
-    'app.analysis.traffic' : 'Traffic',
+    'app.analysis.safe' : 'Safe',
     'app.analysis.table.id' : 'Id',
     'app.analysis.table.search-keyword' : 'Keyword',
     // top search

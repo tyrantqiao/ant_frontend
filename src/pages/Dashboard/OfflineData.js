@@ -8,10 +8,11 @@ import NumberInfo from '@/components/NumberInfo';
 const CustomTab = ({ data, currentTabKey: currentKey }) => (
   <Row gutter={8} style={{ width: 138, margin: '8px 0' }}>
     <Col span={12}>
+    {/* 时间+安全率数字 */}
       <NumberInfo
         title={data.name}
         subTitle={
-          <FormattedMessage id="app.analysis.conversion-rate" defaultMessage="Conversion Rate" />
+          <FormattedMessage id="app.analysis.conversion-rate" defaultMessage="Safe Rate" />
         }
         gap={2}
         total={`${data.cvr * 100}%`}
@@ -50,8 +51,8 @@ const OfflineData = memo(
                 height={400}
                 data={offlineChartData}
                 titleMap={{
-                  y1: formatMessage({ id: 'app.analysis.traffic' }),
-                  y2: formatMessage({ id: 'app.analysis.payments' }),
+                  y1: formatMessage({ id: 'app.analysis.safe' }),
+                  y2: formatMessage({ id: 'app.analysis.unsafe' }),
                 }}
               />
             </div>

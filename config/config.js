@@ -83,7 +83,7 @@ export default {
     // 只要跨域，都需要修改
     proxy : {
         '/django': {
-            target: 'http://155.138.196.145:8001',
+            target: 'http://193.112.28.19:8001',
             changeOrigin: true,
             pathRewrite: {
                 '^/django': ''

@@ -22,6 +22,21 @@ export async function submitNodeForm(params) {
     });
 }
 
+// 获得时间轴数据
+export async function getLineChartData(nodeId) {
+    return request(`${backend}/data/lineChartData/?nodeId=${nodeId}`);
+}
+
+// node safe count
+export async function getNodeSafeCount(nodeId) {
+    return request(`${backend}/data/getSafeCount/?nodeId=${nodeId}`);
+}
+
+// node data count
+export async function getNodeCount(nodeId) {
+    return request(`${backend}/data/getCount/?nodeId=${nodeId}`);
+}
+
 // 更新node节点
 export async function updateNode(params, id) {
     return request(`${backend}/api/nodes/${id}/`, {
@@ -43,6 +58,11 @@ export async function deleteNode(id) {
 // 以list的形式返回nodes
 export async function getNodes() {
     return request(`${backend}/api/nodes/`);
+}
+
+// 返回地理nodes
+export async function getGeoNodes(adcode) {
+    return request(`${backend}/nodes/?adcode=${adcode}`);
 }
 
 // 更新data
@@ -70,22 +90,22 @@ export async function getDatasList() {
 
 // 以list的形式放回searchData
 export async function getSearchData() {
-    return request(`${backend}/api/searchData/`);
+    return request(`${backend}/searchData/`);
 }
 
 // 按list的形式返回data
 export async function getDataByTimescale(timescale, num) {
-    return request(`${backend}/api/data/getByTimescale/?timescale=${timescale}&num=${num}`);
+    return request(`${backend}/data/getByTimescale/?timescale=${timescale}&num=${num}`);
 }
 
-// 按时间尺度分割返回数据，当type为count时，返回月份和count值，目前只做了年份就是十二个月的切分
-export async function countSegmentedByTimescale(timescale, num, type) {
-    return request(`${backend}/data/segmentData/?timescale=${timescale}&num=${num}&type=${type}`);
+// 按时间尺度分割返回数据，当type为count时，返回月份和count值，
+export async function countSegmentedByTimescale(timescale, num, type, nodeId) {
+    return request(`${backend}/data/segmentData/?timescale=${timescale}&num=${num}&type=${type}&nodeId=${nodeId}`);
 }
 
 // 按时间尺度返回安全率，type有safe  unsafe  count之分
-export async function getSegmentSafe(timescale, num, type) {
-    return request(`${backend}/data/segmentSafe/?timescale=${timescale}&num=${num}&type=${type}`);
+export async function getSegmentSafe(timescale, type, nodeId) {
+    return request(`${backend}/data/segmentSafe/?timescale=${timescale}&type=${type}&nodeId=${nodeId}`);
 }
 
 // 获取实时的安全率，默认为一小时内
@@ -129,7 +149,7 @@ export async function getCommodity() {
 }
 
 // getLaAndLong
-export async function getLaAndLong(adcode){
+export async function getLaAndLong(adcode) {
     return request(`/amap/v3/config/district?keywords=${adcode}&subdistrict=0&key=e37d57996f6ccac42feb6857125be64f`);
 }
 
