@@ -11,24 +11,24 @@ export default {
     state : {
         // 分步表单的数据节点配置
         step: {
-            node_name: 'temperature_node_1',
-            node_type: 'temperature',
-            maxVal: '10',
-            minVal: '1',
-            adcode: "440100",
-            "longitude": 113.27,
-            "latitude": 23.13
+            node_name: '',
+            node_type: '',
+            maxVal: '',
+            minVal: '',
+            adcode: "",
+            "longitude": 0,
+            "latitude": 0
         },
         nodes: [
             {
                 id: 1,
-                node_name: 'temperature_1',
-                node_type: 'temperature',
-                minVal: 22,
-                maxVal: 25,
-                adcode: "440100",
-                "longitude": 113.27,
-                "latitude": 23.13
+                node_name: '',
+                node_type: '',
+                minVal: 0,
+                maxVal: 0,
+                adcode: "",
+                "longitude": 0,
+                "latitude": 0
             }
         ]
     },
