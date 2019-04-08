@@ -25,6 +25,10 @@ const havePermissionAsync = new Promise(resolve => {
 Monitor extends Component {
     constructor() {
         super();
+        this.center={'posistion': {
+            longitude: 113.27,
+            latitude: 23.13
+        }}
     }
 
     toggleCtrlBar() {
@@ -99,8 +103,8 @@ Monitor extends Component {
                                         width: '100%',
                                         height: '370px'
                                     }}>
-                                        <Map plugins={['ToolBar']} zoom={5}>
-                                            <Markers markers={markers} useCluster={true}/>
+                                        <Map plugins={['ToolBar']}  zoom={5}>
+                                            <Markers markers={markers} useCluster={true} />
                                         </Map>
                                     </div>
                                 </Tooltip>

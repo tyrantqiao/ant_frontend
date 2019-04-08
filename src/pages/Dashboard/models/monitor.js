@@ -5,7 +5,7 @@ export default {
 
     state : {
         tags: [],
-        safeRate: 55.55,
+        safeRate: 0,
         markers: [],
         daysNum: 0,
         hoursNum: 0
@@ -32,7 +32,13 @@ export default {
             const result = [];
             Object
                 .keys(latestNodesList)
-                .map(key => result.push({'longitude': latestNodesList[key].longitude, 'latitude': latestNodesList[key].latitude}));
+                .map(key => result.push({
+                    'position': {
+                        'longitude': latestNodesList[key].longitude,
+                        'latitude': latestNodesList[key].latitude
+                    }
+                }));
+            console.log(result)
             yield put({type: 'saveLaAndLong', payload: result});
         },
         *fetchTodayCount({
