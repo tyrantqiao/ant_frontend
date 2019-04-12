@@ -45,7 +45,6 @@ class Register extends Component {
     confirmDirty: false,
     visible: false,
     help: '',
-    prefix: '86',
   };
 
   componentDidUpdate() {
@@ -66,6 +65,7 @@ class Register extends Component {
   }
 
   onGetCaptcha = () => {
+    const { form, dispatch }= this.props;
     let count = 59;
     this.setState({ count });
     this.interval = setInterval(() => {
@@ -75,6 +75,15 @@ class Register extends Component {
         clearInterval(this.interval);
       }
     }, 1000);
+    form.validateFields((err, values) => {
+      // const { prefix } = this.state;
+      dispatch({
+        type: 'register/sendVerify',
+        payload: {
+          "email": values.mail,
+        },
+      });
+    });
   };
 
   getPasswordStatus = () => {
@@ -196,7 +205,7 @@ class Register extends Component {
                 },
               ],
             })(
-              <Input size="large" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
+              <Input size="large" type="email" placeholder={formatMessage({ id: 'form.email.placeholder' })} />
             )}
           </FormItem>
           <FormItem help={help}>
@@ -248,37 +257,6 @@ class Register extends Component {
                 placeholder={formatMessage({ id: 'form.confirm-password.placeholder' })}
               />
             )}
-          </FormItem>
-          <FormItem>
-            <InputGroup compact>
-              <Select
-                size="large"
-                value={prefix}
-                onChange={this.changePrefix}
-                style={{ width: '20%' }}
-              >
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-              </Select>
-              {getFieldDecorator('mobile', {
-                rules: [
-                  {
-                    required: true,
-                    message: formatMessage({ id: 'validation.phone-number.required' }),
-                  },
-                  {
-                    pattern: /^\d{11}$/,
-                    message: formatMessage({ id: 'validation.phone-number.wrong-format' }),
-                  },
-                ],
-              })(
-                <Input
-                  size="large"
-                  style={{ width: '80%' }}
-                  placeholder={formatMessage({ id: 'form.phone-number.placeholder' })}
-                />
-              )}
-            </InputGroup>
           </FormItem>
           <FormItem>
             <Row gutter={8}>
