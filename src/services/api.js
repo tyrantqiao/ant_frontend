@@ -2,9 +2,27 @@ import {stringify} from 'qs';
 import fetch from 'dva/fetch';
 import request from '@/utils/request';
 import {async} from 'q';
+import city from './geographic/city.json';
+import province from './geographic/province.json';
 
 // django启动的平台连接
 const backend = '/django';
+
+function getProvince(req, res) {
+    return res.json(province);
+}
+
+function getCity(req, res) {
+    return res.json(city[req.params.province]);
+}
+
+export async function queryProvince() {
+    return getProvince();
+}
+
+export async function queryCity() {
+    return getCity();
+}
 
 // 用来给values/stepForm提交数据管理的请求表单，将会向后端8001/docs发出请求
 export async function submitValuesForm(params) {
@@ -25,6 +43,22 @@ export async function submitNodeForm(params) {
 // 获得时间轴数据
 export async function getLineChartData(nodeId) {
     return request(`${backend}/data/lineChartData/?nodeId=${nodeId}`);
+}
+
+// 发送验证码
+export async function sendVerifyCode(params) {
+    return request(`${backend}/email/send/`, {
+        method: 'POST',
+        body: params
+    })
+}
+
+// 登录
+export async function register(params) {
+    return request(`${backend}/register/`, {
+        method: 'POST',
+        body: params
+    })
 }
 
 // node safe count

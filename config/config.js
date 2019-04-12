@@ -81,9 +81,11 @@ export default {
     // 挂本地服务器代理，防止跨域请求，通过本地前端服务器向后端服务器发送请求
     // 同时由于这里这里是以django作为统一需要修改的请求，而django实际上并不是真正的请求名字 所以做了pathRewrite把它修改掉了
     // 只要跨域，都需要修改
+    // 155.138.196.145
+    // 193.112.28.19
     proxy : {
         '/django': {
-            target: 'http://155.138.196.145:8001',
+            target: 'http://193.112.28.19:8001',
             changeOrigin: true,
             pathRewrite: {
                 '^/django': ''
