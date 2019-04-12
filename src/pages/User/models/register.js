@@ -32,7 +32,7 @@ export default {
             }
         },
         registerHandle(state, {payload}) {
-            setAuthority('user');
+            setAuthority('admin');
             reloadAuthorized();
             return {
                 ...state,

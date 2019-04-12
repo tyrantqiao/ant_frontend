@@ -49,8 +49,8 @@ class Register extends Component {
 
   componentDidUpdate() {
     const { form, register } = this.props;
-    const account = form.getFieldValue('mail');
-    if (register.status === 'ok') {
+    const account = form.getFieldValue('email');
+    if (register.status === 200) {
       router.push({
         pathname: '/user/register-result',
         state: {
@@ -80,19 +80,55 @@ class Register extends Component {
       dispatch({
         type: 'register/sendVerify',
         payload: {
-          "email": values.mail,
+          "email": values.email,
         },
       });
     });
   };
 
+  checkStrong(sPW) {
+    if (sPW.length < 8||sPW.length > 20)
+        return 0; //密码太短或太长
+    let Modes = 0;
+    for (let i = 0; i < sPW.length; i++) {
+        //测试每一个字符的类别并统计一共有多少种模式.
+        Modes |= this.CharMode(sPW.charCodeAt(i));
+    }
+    return this.bitTotal(Modes);
+  }
+  /*
+  判断字符类型
+  */
+  CharMode(iN) {
+      if (iN >= 48 && iN <= 57) //数字
+          return 1;
+      if (iN >= 65 && iN <= 90) //大写字母
+          return 2;
+      if (iN >= 97 && iN <= 122) //小写
+          return 4;
+      else
+          return 8; //特殊字符
+  }
+  /*
+  统计字符类型
+  */
+  bitTotal(num) {
+      let modes = 0;
+      for (let i = 0; i < 4; i++) {
+          if (num & 1) modes++;
+          num >>>= 1;
+      }
+      return modes;
+  }
+
+
   getPasswordStatus = () => {
     const { form } = this.props;
     const value = form.getFieldValue('password');
-    if (value && value.length > 9) {
+    if (value && value.length > 9 && this.checkStrong(value)>2) {
       return 'ok';
     }
-    if (value && value.length > 5) {
+    if (value && value.length > 5 && this.checkStrong(value)==2) {
       return 'pass';
     }
     return 'poor';
@@ -103,12 +139,10 @@ class Register extends Component {
     const { form, dispatch } = this.props;
     form.validateFields({ force: true }, (err, values) => {
       if (!err) {
-        const { prefix } = this.state;
         dispatch({
           type: 'register/submit',
           payload: {
             ...values,
-            prefix,
           },
         });
       }
@@ -193,7 +227,7 @@ class Register extends Component {
         </h3>
         <Form onSubmit={this.handleSubmit}>
           <FormItem>
-            {getFieldDecorator('mail', {
+            {getFieldDecorator('email', {
               rules: [
                 {
                   required: true,
@@ -261,7 +295,7 @@ class Register extends Component {
           <FormItem>
             <Row gutter={8}>
               <Col span={16}>
-                {getFieldDecorator('captcha', {
+                {getFieldDecorator('verify', {
                   rules: [
                     {
                       required: true,
