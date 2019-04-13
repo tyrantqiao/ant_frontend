@@ -2,6 +2,8 @@ export default[
     { // user
         path : '/user',
         component : '../layouts/UserLayout',
+        Routes : ['src/pages/Authorized'],
+        // authority: ['admin', 'user'],
         routes : [
             {
                 path: '/user',
@@ -26,6 +28,7 @@ export default[
         path : '/',
         component : '../layouts/BasicLayout',
         Routes : ['src/pages/Authorized'],
+        // authority: ['admin', 'user'],
         routes : [
             {
                 path: '/',
@@ -38,11 +41,13 @@ export default[
                     {
                         path: '/dashboard/analysis',
                         name: 'analysis',
-                        component: './Dashboard/Analysis'
+                        component: './Dashboard/Analysis',
+                        // authority: ['guest', 'admin', 'user']
                     }, {
                         path: '/dashboard/monitor',
                         name: 'monitor',
-                        component: './Dashboard/Monitor'
+                        component: './Dashboard/Monitor',
+                        // authority: ['guest', 'admin', 'user']
                     }
                 ]
             },
@@ -55,7 +60,8 @@ export default[
                     {
                         path: '/values/list-form',
                         name: 'valuesListform',
-                        component: './Values/list/listForm'
+                        component: './Values/list/listForm',
+                        // authority: ['admin', 'user']
                     }, {
                         path: '/values/step-form',
                         name: 'valStepform',
@@ -64,19 +70,23 @@ export default[
                         routes: [
                             {
                                 path: '/values/step-form',
-                                redirect: '/values/step-form/info'
+                                redirect: '/values/step-form/info',
+                                // authority: ['admin']
                             }, {
                                 path: '/values/step-form/info',
                                 name: 'info',
-                                component: './Values/StepForm/Step1'
+                                component: './Values/StepForm/Step1',
+                                // authority: ['admin']
                             }, {
                                 path: '/values/step-form/confirm',
                                 name: 'confirm',
-                                component: './Values/StepForm/Step2'
+                                component: './Values/StepForm/Step2',
+                                // authority: ['admin']
                             }, {
                                 path: '/values/step-form/result',
                                 name: 'result',
-                                component: './Values/StepForm/Step3'
+                                component: './Values/StepForm/Step3',
+                                // authority: ['admin']
                             }
                         ]
                     }
@@ -93,7 +103,8 @@ export default[
                     {
                         path: '/node/list-form',
                         name: 'nodeListform',
-                        component: './Nodes/list/listForm'
+                        component: './Nodes/list/listForm',
+                        // authority: ['admin', 'user']
                     }, {
                         path: '/node/step-form',
                         name: 'nodeStepform',
@@ -102,19 +113,24 @@ export default[
                         routes: [
                             {
                                 path: '/node/step-form',
-                                redirect: '/node/step-form/info'
+                                redirect: '/node/step-form/info',
+                                // authority: ['admin']
                             }, {
                                 path: '/node/step-form/info',
                                 name: 'info',
-                                component: './Nodes/StepForm/Step1'
+                                component: './Nodes/StepForm/Step1',
+                                // authority: ['admin']
                             }, {
                                 path: '/node/step-form/confirm',
                                 name: 'confirm',
-                                component: './Nodes/StepForm/Step2'
+                                component: './Nodes/StepForm/Step2',
+                                // authority: ['admin']
+
                             }, {
                                 path: '/node/step-form/result',
                                 name: 'result',
-                                component: './Nodes/StepForm/Step3'
+                                component: './Nodes/StepForm/Step3',
+                                // authority: ['admin']
                             }
                         ]
                     }
@@ -127,12 +143,14 @@ export default[
                     {
                         path: '/profile/basic',
                         name: 'basic',
-                        component: './Profile/BasicProfile'
+                        component: './Profile/BasicProfile',
+                        // authority: ['admin', 'user']
                     }, {
                         path: '/profile/basic/:id',
                         name: 'basic',
                         hideInMenu: true,
-                        component: './Profile/BasicProfile'
+                        component: './Profile/BasicProfile',
+                        // authority: ['admin', 'user']
                     }
                 ]
             }, {
@@ -171,16 +189,20 @@ export default[
                         routes: [
                             {
                                 path: '/account/center',
-                                redirect: '/account/center/articles'
+                                redirect: '/account/center/articles',
+                                // authority: ['admin', 'user']
                             }, {
                                 path: '/account/center/articles',
-                                component: './Account/Center/Articles'
+                                component: './Account/Center/Articles',
+                                // authority: ['admin', 'user']
                             }, {
                                 path: '/account/center/applications',
-                                component: './Account/Center/Applications'
+                                component: './Account/Center/Applications',
+                                // authority: ['admin', 'user']
                             }, {
                                 path: '/account/center/projects',
-                                component: './Account/Center/Projects'
+                                component: './Account/Center/Projects',
+                                // authority: ['admin', 'user']
                             }
                         ]
                     }, {
@@ -190,11 +212,13 @@ export default[
                         routes: [
                             {
                                 path: '/account/settings',
-                                redirect: '/account/settings/base'
+                                redirect: '/account/settings/base',
+                                // authority: ['admin', 'user']
                             }, {
                                 path: '/account/settings/base',
-                                component: './Account/Settings/BaseView'
-                            }, 
+                                component: './Account/Settings/BaseView',
+                                // authority: ['admin', 'user']
+                            }
                         ]
                     }
                 ]

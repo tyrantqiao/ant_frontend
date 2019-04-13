@@ -38,7 +38,6 @@ export default {
                         'latitude': latestNodesList[key].latitude
                     }
                 }));
-            console.log(result)
             yield put({type: 'saveLaAndLong', payload: result});
         },
         *fetchTodayCount({

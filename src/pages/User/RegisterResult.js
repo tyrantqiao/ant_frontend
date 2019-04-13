@@ -7,7 +7,7 @@ import styles from './RegisterResult.less';
 
 const actions = (
   <div className={styles.actions}>
-    <Link to="/">
+    <Link to="/user/login">
       <Button size="large">
         <FormattedMessage id="app.register-result.back-home" />
       </Button>

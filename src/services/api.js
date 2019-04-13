@@ -187,6 +187,14 @@ export async function getLaAndLong(adcode) {
     return request(`/amap/v3/config/district?keywords=${adcode}&subdistrict=0&key=e37d57996f6ccac42feb6857125be64f`);
 }
 
+// 登录
+export async function login(params) {
+    return request(`${backend}/login/`, {
+        method: 'POST',
+        body: params
+    });
+}
+
 export async function fakeSubmitForm(params) {
     return request('/api/forms', {
         method: 'POST',
