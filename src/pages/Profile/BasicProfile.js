@@ -59,7 +59,7 @@ const OfflineData = React.lazy(() => import ('./OfflineData'));
 @Form.create()
 class BasicProfile extends React.PureComponent {
     state = {
-        currentTabKey: ''
+        currentTabKey: '',
     };
 
     componentDidMount() {

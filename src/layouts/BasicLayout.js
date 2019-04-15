@@ -107,6 +107,7 @@ class BasicLayout extends React.Component {
       menuData,
       breadcrumbNameMap,
       fixedHeader,
+      nodes,
     } = this.props;
 
     const isTop = PropsLayout === 'topmenu';
@@ -164,6 +165,7 @@ export default connect(({ global, setting, menu: menuModel }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   menuData: menuModel.menuData,
+  nodes: global.nodes,
   breadcrumbNameMap: menuModel.breadcrumbNameMap,
   ...setting,
 }))(props => (

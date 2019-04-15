@@ -28,6 +28,9 @@ export default[
         path : '/',
         component : '../layouts/BasicLayout',
         Routes : ['src/pages/Authorized'],
+        hideInMenu: true,
+        hideChildrenInMenu: true,
+        hideInBreadcrumb: true,
         // authority: ['admin', 'user'],
         routes : [
             {
@@ -145,7 +148,13 @@ export default[
                         name: 'basic',
                         component: './Profile/BasicProfile',
                         // authority: ['admin', 'user']
-                    }, {
+                    }, 
+                    {
+                        path: '/profile/advanced',
+                        name: 'advanced',
+                        component: './Profile/AdvancedProfile',
+                        // authority: ['admin', 'user']
+                    },{
                         path: '/profile/basic/:id',
                         name: 'basic',
                         hideInMenu: true,

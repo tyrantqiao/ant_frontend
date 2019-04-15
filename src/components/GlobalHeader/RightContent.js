@@ -54,6 +54,22 @@ export default class GlobalHeaderRight extends PureComponent {
     return unreadMsg;
   };
 
+  // 若是这样定义getNodes()，则为一个方法，那么就不能获取pros中的内容，而当定义为=()=>{}时，就会变成一个class.property
+  getNodes = () =>{
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'global/getNodesList'
+    });
+  };
+
+  nodeProfile = searchName =>{
+    const {dispatch} =  this.props;
+    dispatch({
+      type: 'global/linkToNodeProfile',
+      payload: searchName,
+    })
+  }
+
   changeReadState = clickedItem => {
     const { id } = clickedItem;
     const { dispatch } = this.props;
@@ -71,7 +87,13 @@ export default class GlobalHeaderRight extends PureComponent {
       onMenuClick,
       onNoticeClear,
       theme,
+      nodes,
     } = this.props;
+    let nodeOptions = [];
+    this
+    .props
+    .nodes
+    .map(node => nodeOptions.push(node.id+':'+node.node_name));
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="userCenter">
@@ -104,22 +126,15 @@ export default class GlobalHeaderRight extends PureComponent {
         <HeaderSearch
           className={`${styles.action} ${styles.search}`}
           placeholder={formatMessage({ id: 'component.globalHeader.search' })}
-          dataSource={[
-            formatMessage({ id: 'component.globalHeader.search.example1' }),
-            formatMessage({ id: 'component.globalHeader.search.example2' }),
-            formatMessage({ id: 'component.globalHeader.search.example3' }),
-          ]}
-          onSearch={value => {
-            console.log('input', value); // eslint-disable-line
-          }}
-          onPressEnter={value => {
-            console.log('enter', value); // eslint-disable-line
-          }}
+          // DataSource里面添加一些node的选择，加个数据进来，然后跳转到profile页去
+          dataSource={nodeOptions}
+          onSearch={this.getNodes}
+          onPressEnter={this.nodeProfile}
         />
         <Tooltip title={formatMessage({ id: 'component.globalHeader.help' })}>
           <a
             target="_blank"
-            href="https://pro.ant.design/docs/getting-started"
+            href="https://github.com/tyrantqiao/ant_frontend.git"
             rel="noopener noreferrer"
             className={styles.action}
           >
@@ -130,7 +145,6 @@ export default class GlobalHeaderRight extends PureComponent {
           className={styles.action}
           count={currentUser.unreadCount}
           onItemClick={(item, tabProps) => {
-            console.log(item, tabProps); // eslint-disable-line
             this.changeReadState(item, tabProps);
           }}
           loading={fetchingNotices}
