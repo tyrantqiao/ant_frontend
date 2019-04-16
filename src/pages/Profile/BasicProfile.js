@@ -64,7 +64,7 @@ class BasicProfile extends React.PureComponent {
 
     componentDidMount() {
         const {dispatch} = this.props;
-        dispatch({type: "profile/getGeoNodes"});
+        // dispatch({type: "profile/getGeoNodes"});
     }
 
     handleTabChange = key => {

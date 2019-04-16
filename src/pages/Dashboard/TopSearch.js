@@ -33,24 +33,6 @@ const columns = [
         key: 'count',
         sorter: (a, b) => a.count - b.count,
         className: styles.alignRight
-    }, {
-        title: <FormattedMessage
-            id="app.analysis.table.weekly-range"
-            defaultMessage="Weekly Range"/>,
-        dataIndex: 'range',
-        key: 'range',
-        sorter: (a, b) => a.range - b.range,
-        render: (text, record) => (
-            <Trend
-                flag={record.status === 1
-                ? 'down'
-                : 'up'}>
-                <span style={{
-                    marginRight: 4
-                }}>{text}%</span>
-            </Trend>
-        ),
-        align: 'right'
     }
 ];
 

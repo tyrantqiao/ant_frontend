@@ -1,4 +1,4 @@
-import {queryNotices, getNodes} from '@/services/api';
+import {queryNotices, getNodes,addSearchHistory} from '@/services/api';
 import {routerRedux} from 'dva/router';
 
 export default {
@@ -16,7 +16,10 @@ export default {
             yield put({type: 'saveNodes', payload: latestNodesList});
         },
         *linkToNodeProfile({payload},{call,put}){
-          yield put(routerRedux.push('/profile/advanced', {nodeId: payload.split(':')[0]}));
+          yield put(routerRedux.push('/profile/basic', {nodeId: payload.split(':')[0]}));
+        },
+        *addSearchData({payload},{call,put}){
+          yield call(addSearchHistory,payload);
         },
         *fetchNotices(_, {call, put, select}) {
             const data = yield call(queryNotices);

@@ -148,19 +148,14 @@ export default[
                         name: 'basic',
                         component: './Profile/BasicProfile',
                         // authority: ['admin', 'user']
-                    }, 
-                    {
-                        path: '/profile/advanced',
-                        name: 'advanced',
-                        component: './Profile/AdvancedProfile',
-                        // authority: ['admin', 'user']
-                    },{
-                        path: '/profile/basic/:id',
-                        name: 'basic',
-                        hideInMenu: true,
-                        component: './Profile/BasicProfile',
-                        // authority: ['admin', 'user']
-                    }
+                    },
+                    //  {
+                    //     path: '/profile/basic/:id',
+                    //     name: 'basic',
+                    //     hideInMenu: true,
+                    //     component: './Profile/BasicProfile',
+                    //     // authority: ['admin', 'user']
+                    // }
                 ]
             }, {
                 name: 'exception',
@@ -191,30 +186,31 @@ export default[
                 icon: 'user',
                 path: '/account',
                 routes: [
+                    // {
+                    //     path: '/account/center',
+                    //     name: 'center',
+                    //     component: './Account/Center/Center',
+                    //     routes: [
+                    //         {
+                    //             path: '/account/center',
+                    //             redirect: '/account/center/articles',
+                    //             // authority: ['admin', 'user']
+                    //         }, {
+                    //             path: '/account/center/articles',
+                    //             component: './Account/Center/Articles',
+                    //             // authority: ['admin', 'user']
+                    //         }, {
+                    //             path: '/account/center/applications',
+                    //             component: './Account/Center/Applications',
+                    //             // authority: ['admin', 'user']
+                    //         }, {
+                    //             path: '/account/center/projects',
+                    //             component: './Account/Center/Projects',
+                    //             // authority: ['admin', 'user']
+                    //         }
+                    //     ]
+                    // }, 
                     {
-                        path: '/account/center',
-                        name: 'center',
-                        component: './Account/Center/Center',
-                        routes: [
-                            {
-                                path: '/account/center',
-                                redirect: '/account/center/articles',
-                                // authority: ['admin', 'user']
-                            }, {
-                                path: '/account/center/articles',
-                                component: './Account/Center/Articles',
-                                // authority: ['admin', 'user']
-                            }, {
-                                path: '/account/center/applications',
-                                component: './Account/Center/Applications',
-                                // authority: ['admin', 'user']
-                            }, {
-                                path: '/account/center/projects',
-                                component: './Account/Center/Projects',
-                                // authority: ['admin', 'user']
-                            }
-                        ]
-                    }, {
                         path: '/account/settings',
                         name: 'settings',
                         component: './Account/Settings/Info',

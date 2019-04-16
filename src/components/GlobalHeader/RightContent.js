@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component,PureComponent } from 'react';
 import { FormattedMessage, formatMessage } from 'umi/locale';
 import { Spin, Tag, Menu, Icon, Avatar, Tooltip, message } from 'antd';
 import moment from 'moment';
@@ -67,6 +67,10 @@ export default class GlobalHeaderRight extends PureComponent {
     dispatch({
       type: 'global/linkToNodeProfile',
       payload: searchName,
+    });
+    dispatch({
+      type: 'global/addSearchData',
+      payload: {'keyword':searchName}
     })
   }
 

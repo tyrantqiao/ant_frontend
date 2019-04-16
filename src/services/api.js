@@ -32,6 +32,13 @@ export async function submitValuesForm(params) {
     });
 }
 
+export async function addSearchHistory(params){
+    return request(`${backend}/searchData/addHistory/`,{
+        method: 'POST',
+        body: params
+    })
+}
+
 // 用来给node/stepForm提交数据节点管理的请求表单，将会向后端8001/docs发出请求
 export async function submitNodeForm(params) {
     return request(`${backend}/api/nodes/`, {
