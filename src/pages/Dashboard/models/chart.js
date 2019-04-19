@@ -33,7 +33,7 @@ export default {
             {
                 x: '家用电器',
                 y: 0
-            },
+            }
         ],
         salesTypeDataOnline: [],
         salesTypeDataOffline: [],
@@ -42,6 +42,7 @@ export default {
     },
 
     effects : {
+        *fetchAllData(_, {call, put}) {},
         *fetch(_, {call, put}) {
             const response = yield call(fakeChartData);
             yield put({type: 'save', payload: response});

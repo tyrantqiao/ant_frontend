@@ -13,18 +13,22 @@ const TopSearch = React.lazy(() => import ('./TopSearch'));
 const ProportionSales = React.lazy(() => import ('./ProportionSales'));
 const OfflineData = React.lazy(() => import ('./OfflineData'));
 
-@connect(({chart, loading}) => ({chart, loading: loading.effects['chart/fetch']}))
+// loading是dva中预设有的一个对象，loading.effects[*xxx/xxx] loading.global(全部) loading.models.role
+@connect(({chart, loading}) => ({chart, loading: loading.chart}))
 class Analysis extends Component {
     state = {
         Type: 'all',
         currentTabKey: '',
+        intervalId: '',
         // 默认时间选择区域为一年
         rangePickerValue: getTimeDistance('year')
     };
 
+    // 当一个组件挂载时调用
     componentDidMount() {
         const {dispatch} = this.props;
-        this.reqRef = requestAnimationFrame(() => {
+        this.intervalId = setInterval(() => {
+            dispatch({type: 'chart/fetchAllData'});
             dispatch({type: 'chart/fetch'});
             dispatch({type: 'chart/fetchSearchData'});
             dispatch({type: 'chart/fetchSalesTypeData'});
@@ -58,7 +62,7 @@ class Analysis extends Component {
                     num: 'all'
                 }
             })
-        });
+        }, 10000)
     }
 
     // 按时间区间获得数据
@@ -98,6 +102,7 @@ class Analysis extends Component {
 
     componentWillUnmount() {
         const {dispatch} = this.props;
+        clearInterval(this.intervalId);
         dispatch({type: 'chart/clear'});
         cancelAnimationFrame(this.reqRef);
     }
@@ -203,6 +208,7 @@ class Analysis extends Component {
                                     visitData2={visitData2}
                                     selectDate={this.selectDate}
                                     searchData={searchData}
+                                    loading={loading}
                                     dropdownGroup={dropdownGroup}/>
                             </Suspense>
                         </Col>

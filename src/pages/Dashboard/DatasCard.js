@@ -27,24 +27,10 @@ const DatasCard = memo(({
                 tabBarExtraContent={< div className = {
                 styles.datasExtraWrap
             } > <div className={styles.datasExtra}>
-                    {/* <a className={isActive('today')} onClick={() => selectDate('today')}>
-                        <FormattedMessage id="app.analysis.all-day" defaultMessage="All Day"/>
-                    </a>
-                    <a className={isActive('week')} onClick={() => selectDate('week')}>
-                        <FormattedMessage id="app.analysis.all-week" defaultMessage="All Week"/>
-                    </a>
-                    <a className={isActive('month')} onClick={() => selectDate('month')}>
-                        <FormattedMessage id="app.analysis.all-month" defaultMessage="All Month"/>
-                    </a> */}
                     <a className={isActive('year')} onClick={() => selectDate('year')}>
                         <FormattedMessage id="app.analysis.all-year" defaultMessage="All Year"/>
                     </a>
                 </div>
-                {/* < RangePicker value = {rangePickerValue}
-                onChange = {
-                    handleRangePickerChange
-                }
-                style = {{ width: 256 }}/>  */}
             </div >}
                 size="large"
                 tabBarStyle={{

@@ -55,11 +55,11 @@ const IntroduceRow = React.lazy(() => import ('./IntroduceRow'));
 const OfflineData = React.lazy(() => import ('./OfflineData'));
 
 // 接入数据时必须要导入类本身，然后才可以通过const {params}= class的形式获取里面的参数
-@connect(({profile}) => ({profile}))
+@connect(({profile, loading}) => ({profile, loading: loading.profile}))
 @Form.create()
 class BasicProfile extends React.PureComponent {
     state = {
-        currentTabKey: '',
+        currentTabKey: ''
     };
 
     componentDidMount() {
