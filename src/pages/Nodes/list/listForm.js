@@ -9,6 +9,7 @@ import {
     Tag,
     Icon,
     Button,
+    Switch,
     Popconfirm
 } from 'antd';
 // 根据router.config.jd生成的路由表存在于pages/.umi下
@@ -93,6 +94,7 @@ class ListForm extends React.PureComponent {
             data: this.props.nodes,
             editingKey: ''
         };
+
         // columns只是用来渲染表格初始状态的，所以只要在page页定义即可，数据源在定义在models中
         this.columns = [
             {
@@ -105,8 +107,17 @@ class ListForm extends React.PureComponent {
                 title: 'id',
                 dataIndex: 'id',
                 sorter: true,
-                sorter: (a, b) => a.id - b.id,
-                width: '10%'
+                sorter: (a, b) => a.id - b.id
+            }, {
+                title: '节点设备id',
+                dataIndex: 'nodeId',
+                editable: true
+            }, {
+                title: '节点是否需要订阅',
+                dataIndex: 'subscibe',
+                render: subscribe => (
+                    <Switch defaultChecked={subscribe} onChange={this.makeSubscribe}></Switch>
+                ),
             }, {
                 title: '节点类型',
                 dataIndex: 'node_type',
@@ -121,25 +132,21 @@ class ListForm extends React.PureComponent {
                         </Tag>
                     </span>
                 ),
-                width: '15%',
                 editable: true,
                 ...this.getColumnSearchProps('node_type')
             }, {
                 title: '最小值',
                 dataIndex: 'minVal',
-                width: '15%',
                 sorter: (a, b) => a.minVal - b.minVal,
                 editable: true
             }, {
                 title: '最大值',
                 dataIndex: 'maxVal',
-                width: '15%',
                 sorter: (a, b) => a.maxVal - b.maxVal,
                 editable: true
             }, {
                 title: '行政区编码',
                 dataIndex: 'adcode',
-                width: '10%',
                 sorter: (a, b) => a.maxVal - b.maxVal,
                 editable: true,
                 ...this.getColumnSearchProps('adcode')
@@ -184,6 +191,18 @@ class ListForm extends React.PureComponent {
                 }
             }
         ];
+    }
+
+    makeSubscribe = (nodeId, subscribe) => {
+        this
+            .props
+            .dispatch({
+                type: 'node/makeSubscribe',
+                payload: {
+                    'nodeId': nodeId,
+                    'subscribe': subscribe
+                }
+            });
     }
 
     getColumnSearchProps = (dataIndex) => ({

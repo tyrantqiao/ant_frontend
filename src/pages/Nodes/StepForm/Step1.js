@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {connect} from 'dva';
-import {Form, Input, Button, Select, Divider} from 'antd';
+import {Form, Input, Button, Select, Divider,Switch} from 'antd';
 import {formatMessage, FormattedMessage} from 'umi/locale';
 import router from 'umi/router';
 import styles from './style.less';
@@ -74,6 +74,32 @@ class Step1 extends React.PureComponent {
                                 placeholder="demo_name_1"/>)}
                         </Input.Group>
                     </Form.Item>
+                    <Form.Item {...formItemLayout} label="数据节点标志">
+                        {getFieldDecorator('nodeId', {
+                            initialValue: data.nodeId,
+                            rules: [
+                                {
+                                    required: true,
+                                    message: '请输入数据节点标志'
+                                }
+                            ]
+                        })(<Input
+                            style={{
+                            width: 'calc(100% - 100px)'
+                        }}
+                            placeholder="device_uid"/>)}
+                    </Form.Item>
+                    <Form.Item {...formItemLayout} label="订阅该数据节点">
+                        {getFieldDecorator('switch', {
+                            initialValue: data.subscribe,
+                            rules: [
+                                {
+                                    required: true,
+                                    message: '请选择是否要订阅数据节点'
+                                }
+                            ]
+                        })(<Switch/>)}
+                    </Form.Item>
                     <Form.Item {...formItemLayout} label="数据节点类型">
                         <Input.Group compact>
                             {getFieldDecorator('node_type', {
@@ -83,7 +109,6 @@ class Step1 extends React.PureComponent {
                                         required: true,
                                         message: '请输入数据节点的类型'
                                     }
-                                    // { type: 'email', message: '限制类型' },
                                 ]
                             })(<Input
                                 style={{

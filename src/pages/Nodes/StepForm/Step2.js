@@ -69,6 +69,12 @@ class Step2 extends React.PureComponent {
                 <Form.Item {...formItemLayout} className={styles.stepFormText} label="最大安全值">
                     <span className={styles.number}>{data.maxVal}</span>
                 </Form.Item>
+                <Form.Item {...formItemLayout} className={styles.stepFormText} label="订阅节点">
+                    {data.subscribe==true?'true':'false'}
+                </Form.Item>
+                <Form.Item {...formItemLayout} className={styles.stepFormText} label="节点物理id">
+                    {data.nodeId}
+                </Form.Item>
                 <Form.Item {...formItemLayout} className={styles.stepFormText} label="地址">
                     {data.adcode}
                 </Form.Item>

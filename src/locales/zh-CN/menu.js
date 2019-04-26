@@ -16,7 +16,7 @@ export default {
   'menu.node.nodeStepform.info': '管理数据节点（填写数据节点信息）',
   'menu.node.nodeStepform.confirm': '管理数据节点（确认表单信息）',
   'menu.node.nodeStepform.result': '管理数据节点（完成）',
-  'menu.node.nodeListform': '数据列表页',
+  'menu.node.nodeListform': '数据节点列表页',
   // 设置数据页的中文内容
   'menu.values': '数据页',
   'menu.values.valStepform': '管理数据',

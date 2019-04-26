@@ -50,6 +50,22 @@ class Step3 extends React.PureComponent {
         </Row>
         <Row>
           <Col xs={24} sm={8} className={styles.label}>
+            订阅数据节点：
+          </Col>
+          <Col xs={24} sm={16}>
+            {data.subscribe==true?'true':'false'}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={24} sm={8} className={styles.label}>
+            节点物理id：
+          </Col>
+          <Col xs={24} sm={16}>
+            {data.nodeId}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={24} sm={8} className={styles.label}>
             行政区编号：
           </Col>
           <Col xs={24} sm={16}>

@@ -15,6 +15,8 @@ export default {
             node_type: '',
             maxVal: '',
             minVal: '',
+            subscribe: true,
+            nodeId: "dwdwdwdw",
             adcode: "",
             "longitude": 0,
             "latitude": 0
@@ -27,6 +29,8 @@ export default {
                 minVal: 0,
                 maxVal: 0,
                 adcode: "",
+                subscribe: false,
+                nodeId: "dwdwdwdw",
                 "longitude": 0,
                 "latitude": 0
             }
