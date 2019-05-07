@@ -125,6 +125,19 @@ class ListForm extends React.PureComponent {
                         .makeSubscribe
                         (checked, subscribe, record.nodeId, record.id)}}></Switch>
                 )
+            },
+            {
+                title: '开启tx',
+                dataIndex: 'tx',
+                editable: true,
+                render: (tx, record) => (
+                    <Switch
+                        defaultChecked={tx}
+                        // onClick={(subscribe)=>{subscribe=!subscribe}}
+                        onChange={(checked)=>{this
+                        .makeTx
+                        (checked, tx, record.nodeId, record.id)}}></Switch>
+                )
             }, {
                 title: '节点类型',
                 dataIndex: 'node_type',
@@ -202,6 +215,18 @@ class ListForm extends React.PureComponent {
                 }
             }
         ];
+    }
+    makeTx = (checked,tx, nodeId, id,) => {
+        this
+            .props
+            .dispatch({
+                type: 'node/makeTx',
+                payload: {
+                    'id': id,
+                    'nodeId': nodeId,
+                    'tx': checked
+                }
+            });
     }
 
     makeSubscribe = (checked,subscribe, nodeId, id,) => {

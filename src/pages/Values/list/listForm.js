@@ -122,7 +122,7 @@ class ListForm extends React.PureComponent {
                 sorter: (a, b) => a.val - b.val,
                 editable: true
             }, {
-                title: '数据值',
+                title: '强度',
                 dataIndex: 'intensity',
                 sorter: (a, b) => a.intensity - b.intensity,
                 editable: true

@@ -75,6 +75,13 @@ export async function subscribe(params,id) {
     })
 }
 
+export async function tx(params,id) {
+    return request(`${backend}/nodes/${id}/test/`, {
+        method: 'POST',
+        body: params
+    })
+}
+
 // node safe count
 export async function getNodeSafeCount(nodeId) {
     return request(`${backend}/data/getSafeCount/?nodeId=${nodeId}`);
