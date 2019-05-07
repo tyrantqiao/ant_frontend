@@ -87,7 +87,7 @@ class EditableCell extends React.Component {
 }
 
 // connect属于dva的语法糖，用于将数据绑定起来 这里就应该是负责连接models文件，以文件名形式绑定
-@connect(({values,loading}) => ({datas: values.datas,loading: loading.values}))
+@connect(({values, loading}) => ({datas: values.datas, loading: loading.values}))
 // 这样包装后的组件会自带 this.props.form 属性 @Form.create()
 class ListForm extends React.PureComponent {
     constructor(props) {
@@ -104,25 +104,31 @@ class ListForm extends React.PureComponent {
             {
                 title: '数据id',
                 dataIndex: 'id',
-                width: '10%',
                 sorter: (a, b) => a.id - b.id
             }, {
                 title: '节点id',
                 dataIndex: 'nodeId',
                 sorter: (a, b) => a.nodeId - b.nodeId,
-                editable: true,
-                ...this.getColumnSearchProps('nodeId')
-            }, {
+                editable: true
+            },
+            //  {
+            //     title: '设备id',
+            //     dataIndex: 'device_id',
+            //     editable: true
+            // }, 
+            {
                 title: '数据值',
                 dataIndex: 'val',
                 sorter: (a, b) => a.val - b.val,
-                width: '10%',
-                editable: true,
-                ...this.getColumnSearchProps('val')
+                editable: true
+            }, {
+                title: '数据值',
+                dataIndex: 'intensity',
+                sorter: (a, b) => a.intensity - b.intensity,
+                editable: true
             }, {
                 title: '单位',
                 dataIndex: 'unit',
-                width: '15%',
                 render: unit => (
                     <span>
                         <Tag
@@ -139,7 +145,6 @@ class ListForm extends React.PureComponent {
             }, {
                 title: '安全',
                 dataIndex: 'safe',
-                width: '10%',
                 render: safe => (
                     <span>
                         <Tag
@@ -156,9 +161,29 @@ class ListForm extends React.PureComponent {
                 editable: true,
                 ...this.getColumnSearchProps('safe')
             }, {
+                title: '确认',
+                dataIndex: 'confirmed',
+                render: confirmed => (
+                    <span>
+                        <Tag
+                            color={confirmed === true
+                            ? 'green'
+                            : 'red'}
+                            key={confirmed}>
+                            {confirmed
+                                .toString()
+                                .toUpperCase()}
+                        </Tag>
+                    </span>
+                ),
+                editable: true
+            }, {
                 title: '记录时间',
                 dataIndex: 'recordTime',
-                width: '20%',
+                editable: true
+            }, {
+                title: '时间',
+                dataIndex: 'time',
                 editable: true
             }, {
                 title: 'Action',

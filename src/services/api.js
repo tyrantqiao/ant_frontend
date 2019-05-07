@@ -68,6 +68,13 @@ export async function register(params) {
     })
 }
 
+export async function subscribe(params,id) {
+    return request(`${backend}/nodes/${id}/subscribe/`, {
+        method: 'POST',
+        body: params
+    })
+}
+
 // node safe count
 export async function getNodeSafeCount(nodeId) {
     return request(`${backend}/data/getSafeCount/?nodeId=${nodeId}`);

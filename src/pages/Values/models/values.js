@@ -20,6 +20,11 @@ export default {
         step: {
             nodeId: 1,
             val: 10,
+            intensity: 0,
+            confirmed: false,
+            time: '',
+            fPort: 0,
+            reference: "a",
             unit: 'm',
             safe: true,
             recordTime: '2000-03-14T11:45:00'
@@ -27,8 +32,13 @@ export default {
         datas: [
             {
                 id: 1,
-                nodeId: 20,
+                nodeId: 1,
                 val: 10,
+                intensity: 0,
+                confirmed: false,
+                time: '',
+                fPort: 0,
+                reference: "a",
                 unit: 'm',
                 safe: true,
                 recordTime: '2000-03-14T11:45:00'
@@ -37,10 +47,15 @@ export default {
         nodes: [
             {
                 id: 1,
-                node_name: 'temperature_1',
-                node_type: 'temperature',
-                maxVal: 2,
-                minVal: 22
+                node_name: '',
+                node_type: '',
+                minVal: 0,
+                maxVal: 0,
+                adcode: "",
+                subscribe: false,
+                nodeId: "dwdwdwdw",
+                "longitude": 0,
+                "latitude": 0
             }
         ]
     },
@@ -78,6 +93,7 @@ export default {
         *updateData({
             payload
         }, {call, put}) {
+            console.log(payload)
             yield call(updateData, payload, payload.id);
         },
         // 获取datas

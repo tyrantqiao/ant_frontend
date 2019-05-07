@@ -97,7 +97,7 @@ export default class GlobalHeaderRight extends PureComponent {
     this
     .props
     .nodes
-    .map(node => nodeOptions.push(node.id+':'+node.node_name));
+    .map(node => nodeOptions.push(node.id+':'+node.nodeId+":"+node.node_name));
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="userCenter">

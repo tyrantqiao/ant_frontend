@@ -1,7 +1,7 @@
 import {routerRedux} from 'dva/router';
 import {message, Tag, Divider} from 'antd';
 // 需要引入api的函数 error
-import {submitNodeForm, getNodes, deleteNode, updateNode, getLaAndLong} from '@/services/api';
+import {submitNodeForm, getNodes, deleteNode, updateNode, getLaAndLong,subscribe} from '@/services/api';
 
 export default {
     // model的定义名字
@@ -69,6 +69,12 @@ export default {
         *getNodesList(_, {call, put}) {
             const latestNodesList = yield call(getNodes, _);
             yield put({type: 'saveNodes', payload: latestNodesList});
+        },
+        *makeSubscribe({
+            payload
+        }, {call, put}) {
+            console.log(payload)
+            const response = yield call(subscribe, payload, payload.id);
         }
     },
     // 对数据进行交互

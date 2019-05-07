@@ -16,7 +16,7 @@ export default {
             yield put({type: 'saveNodes', payload: latestNodesList});
         },
         *linkToNodeProfile({payload},{call,put}){
-          yield put(routerRedux.push('/profile/basic', {nodeId: payload.split(':')[0]}));
+          yield put(routerRedux.push('/profile/basic', {nodeId: payload.split(':')[1]}));
         },
         *addSearchData({payload},{call,put}){
           yield call(addSearchHistory,payload);

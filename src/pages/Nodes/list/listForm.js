@@ -111,13 +111,20 @@ class ListForm extends React.PureComponent {
             }, {
                 title: '节点设备id',
                 dataIndex: 'nodeId',
-                editable: true
+                editable: true,
+                ...this.getColumnSearchProps('nodeId')
             }, {
                 title: '节点是否需要订阅',
-                dataIndex: 'subscibe',
-                render: subscribe => (
-                    <Switch defaultChecked={subscribe} onChange={this.makeSubscribe}></Switch>
-                ),
+                dataIndex: 'subscribe',
+                editable: true,
+                render: (subscribe, record) => (
+                    <Switch
+                        defaultChecked={subscribe}
+                        // onClick={(subscribe)=>{subscribe=!subscribe}}
+                        onChange={(checked)=>{this
+                        .makeSubscribe
+                        (checked, subscribe, record.nodeId, record.id)}}></Switch>
+                )
             }, {
                 title: '节点类型',
                 dataIndex: 'node_type',
@@ -157,7 +164,9 @@ class ListForm extends React.PureComponent {
                     const editable = this.isEditing(record);
                     return (
                         <span>
-                            <Popconfirm title="确定删除?" onConfirm={() => this.deleteNode({id: record.id})}>
+                            <Popconfirm
+                                title="确定删除?"
+                                onConfirm={() => this.deleteNode({id: record.id})}>
                                 <a href="javascript:;">
                                     Delete
                                 </a>
@@ -177,7 +186,9 @@ class ListForm extends React.PureComponent {
                                                 </a>
                                             )}
                                         </EditableContext.Consumer>
-                                        <Popconfirm title="确定取消?" onConfirm={() => this.cancel(record.id.toString())}>
+                                        <Popconfirm
+                                            title="确定取消?"
+                                            onConfirm={() => this.cancel(record.id.toString())}>
                                             <a>Cancel</a>
                                         </Popconfirm>
                                     </span>
@@ -193,14 +204,15 @@ class ListForm extends React.PureComponent {
         ];
     }
 
-    makeSubscribe = (nodeId, subscribe) => {
+    makeSubscribe = (checked,subscribe, nodeId, id,) => {
         this
             .props
             .dispatch({
                 type: 'node/makeSubscribe',
                 payload: {
+                    'id': id,
                     'nodeId': nodeId,
-                    'subscribe': subscribe
+                    'subscribe': checked
                 }
             });
     }

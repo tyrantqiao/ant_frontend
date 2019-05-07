@@ -28,7 +28,7 @@ class Analysis extends Component {
     componentDidMount() {
         const {dispatch} = this.props;
         this.intervalId = setInterval(() => {
-            dispatch({type: 'chart/fetchAllData'});
+            // dispatch({type: 'chart/fetchAllData'});
             dispatch({type: 'chart/fetch'});
             dispatch({type: 'chart/fetchSearchData'});
             dispatch({type: 'chart/fetchSalesTypeData'});
