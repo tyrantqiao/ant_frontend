@@ -125,6 +125,7 @@ class ListForm extends React.PureComponent {
                 title: '强度',
                 dataIndex: 'intensity',
                 sorter: (a, b) => a.intensity - b.intensity,
+                render: intensity=>(<span>{intensity}dbm</span>),
                 editable: true
             }, {
                 title: '单位',
@@ -182,7 +183,7 @@ class ListForm extends React.PureComponent {
                 dataIndex: 'recordTime',
                 editable: true
             }, {
-                title: '时间',
+                title: '信号传输时间',
                 dataIndex: 'time',
                 editable: true
             }, {
