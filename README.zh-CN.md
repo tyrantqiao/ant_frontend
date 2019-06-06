@@ -20,14 +20,12 @@
 
 ## 效果展示图
 
-![1559832994(1).jpg](https://i.loli.net/2019/06/06/5cf929b1f382b17711.jpg)
+![1559834129(1).jpg](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/1559834129(1).jpg)
 
-![1559834129(1).jpg](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/1559834129(1).jpg?token=AE66MAH77LUTUUKRNUIHON247EXR2)
+![20190606232022.png](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/20190606232022.png)
 
-![20190606232022.png](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/20190606232022.png?token=AE66MAA7C5WXVCPR3DJQ6VK47EXXO)
+![20190606232104.png](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/20190606232104.png)
 
-![20190606232104.png](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/20190606232104.png?token=AE66MACFXZQUC33ZC7H54WC47EX2A)
+![20190606232119.png](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/20190606232119.png)
 
-![20190606232119.png](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/20190606232119.png?token=AE66MADO5EFXRJCMFDVWJFC47EX3A)
-
-![20190606232127.png](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/20190606232127.png?token=AE66MAF5AVRR2P37UO5MOZS47EX3S)
+![20190606232127.png](https://raw.githubusercontent.com/tyrantqiao/picgo/master/img/20190606232127.png)
