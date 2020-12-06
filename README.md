@@ -4,6 +4,24 @@
 
 > This is an iot system's frontend, based on ant-design.
 
+## startup
+
+```bash
+npm install
+npm start
+```
+
+```dockerfile
+  frontend:
+    build: ./ant_frontend
+    command: bash -c "npm install && npm start"
+    volumes:
+      - ./ant_frontend:/usr/src/app/
+    ports:
+      - "9001:8000"
+    restart: always
+```
+
 ## functions
 
 ### languages
